@@ -1,0 +1,24 @@
+/*breadcrumb*/
+.breadcrumb-wrap {
+  border-top: 1px solid #ced4da;
+  border-bottom: 1px solid #ced4da;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 0;
+  border-top: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  padding: 7px 0;
+  color: #555;
+  font-size: $font-size-entry-meta;
+  font-style: italic;
+  ol {
+    background:none;
+    padding: 0;
+    margin: 0;
+  }
+  .delimiter {
+    padding: 0 3px;
+  }
+}

@@ -1,0 +1,46 @@
+/* App
+-------------------------------------------------------------- */
+*:focus {
+  outline: none;
+}
+.app_header {
+  background: rgba(0,0,0,0.8);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 9999;
+  display: block;
+  margin: 0;
+  width: 100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  .search-form {
+    display: flex;
+  }
+  .search-form .search-field {
+    padding: 0.3em 0.5em;
+  }
+  .search-form .search-submit {
+    padding: 0.1em 0.5em;
+  }
+}
+.app_footer {
+  background-color: #1d1d1f;
+  color: #f5f5f7;
+}
+.app_container {
+  padding-top: 75px;
+  padding-bottom: 60px;
+  .row{
+    border: 10px solid #f9f9f9;
+    padding: 20px 0 40px;
+    .col:nth-child(2){
+      border-left: 1px solid #ced4da;
+    }
+  }
+}

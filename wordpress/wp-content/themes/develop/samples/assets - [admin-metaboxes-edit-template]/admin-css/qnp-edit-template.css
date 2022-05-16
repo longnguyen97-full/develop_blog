@@ -1,0 +1,51 @@
+#edit_file_page>.inside{
+    padding: 0;
+    margin: 0;
+}
+.CodeMirror { min-height: 100px; width: 100%; }
+.CodeMirror-scroll { max-height: 1000px; width:100%; }
+.CodeMirror-linenumber {padding: 0 3px 0 0px;}
+.button-green{margin: 10px !important;}
+.button-green{
+    border-color: #00854C !important;
+    background: #1BAE75 !important;
+    text-shadow: 0 -1px 1px #00854C, 1px 0 1px #00854C, 0 1px 1px #00854C, -1px 0 1px #00854C;
+    box-shadow: 0 1px 0 #00854C !important;
+    color: #fff !important;
+}
+.button-green:hover{
+    background: #1aa871 !important;
+}
+select[readonly=readonly]{
+    pointer-events: none;
+    background: #eee;
+}
+#edit_file_page>.inside.readonly{
+    position: relative;
+}
+#edit_file_page>.inside.readonly:before{
+    content:'<?php echo $this->lang['not_change_editor'] ?>';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);;
+    z-index: 11;
+    color: #fff;
+    padding: 15px;
+    font-size: 18px;
+}
+#edit_file_page>.inside>.CodeMirror.not_change{
+    position: relative;
+}
+#edit_file_page>.inside>.CodeMirror.not_change:before{
+    content:'';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);;
+    z-index: 10;
+}

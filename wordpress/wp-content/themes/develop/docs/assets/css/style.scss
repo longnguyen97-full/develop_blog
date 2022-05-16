@@ -1,0 +1,17 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.main-content {
+    max-width: 80rem;
+    padding: 2rem;
+}
+
+.main-content table {
+    display: table;
+}
+
+.main-content table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
