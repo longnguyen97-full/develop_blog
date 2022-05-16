@@ -431,3 +431,9 @@ function theme_show_widget( $index, $id )
 
     return $did_one;
 }
+
+function the_loadmore()
+{
+    $LoadmorePosts = new LoadmorePosts();
+    $LoadmorePosts->loadmoreButton();
+}
