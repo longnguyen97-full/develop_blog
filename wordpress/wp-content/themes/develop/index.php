@@ -18,7 +18,10 @@
 get_header(); ?>
 <main class="app_container container">
     <div class="row">
-        <div class="col col-md-8">
+        <div class="col col-md-3">
+            <?php get_sidebar(); ?>
+        </div>
+        <div class="col col-md-6">
             <?php
             if ( have_posts() ) :
 
@@ -27,8 +30,10 @@ get_header(); ?>
                     get_template_part( 'template-parts/content' );
 
                 endwhile;
+                wp_reset_postdata();
 
                 the_bootstrap_paginate_links();
+                the_loadmore();
 
             else :
 
@@ -37,8 +42,8 @@ get_header(); ?>
             endif;
             ?>
         </div>
-        <div class="col col-md-4">
-            <?php get_sidebar(); ?>
+        <div class="col col-md-3">
+            <?php /*get_sidebar();*/ ?>
         </div>
     </div>
 </main>
