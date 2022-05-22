@@ -10,6 +10,8 @@ class LoadmorePosts
      */
     public function __construct()
     {
+        global $wp_query;
+        $this->wp_query = $wp_query;
         add_action('wp_enqueue_scripts', array($this, 'loadScripts'));
         add_action('wp_ajax_loadmore', array($this, 'loadmoreAjaxCallback'));
         add_action('wp_ajax_nopriv_loadmore', array($this, 'loadmoreAjaxCallback'));
@@ -17,12 +19,10 @@ class LoadmorePosts
 
     public function queryVar($key = '', $is_wp_query = false)
     {
-        global $wp_query;
-
         $var = (int) get_query_var($key);
 
         if ($is_wp_query === true) {
-            $var = (int) $wp_query->{$key};
+            $var = (int) $this->wp_query->{$key};
         }
 
         return $var;
@@ -30,8 +30,6 @@ class LoadmorePosts
 
     public function loadScripts()
     {
-        global $wp_query;
-
         wp_enqueue_style(TEXT_DOMAIN . '-loadmore-theme', getAssets() . '/css/loadmore.css', array(), wp_get_theme()->get('Version'));
         wp_register_script(TEXT_DOMAIN . '-loadmore-script', getAssets() . '/js/loadmore.js', array('jquery'), wp_get_theme()->get('Version'), true);
         wp_localize_script(TEXT_DOMAIN . '-loadmore-script', 'loadmore_params', array(
