@@ -1,5 +1,5 @@
 <?php
-function get_user_form()
+function mp_get_user_form()
 {
 	if (!is_user_logged_in()) :
 		?>
