@@ -1,0 +1,83 @@
+.emoji__container {
+	display: flex;
+}
+
+.emoji {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin-right: 15px;
+	cursor: pointer;
+}
+
+.emoji i {
+	margin: 8px 5px 5px 8px;
+	color: #000000;
+}
+
+.emoji:hover {
+	background-color: #ffffff;
+	border-style: solid;
+	border-color: coral;
+}
+
+.emoji__like {
+	background: #548dff;
+}
+
+.emoji__love {
+	background: #f55064;
+}
+
+.emoji__haha {
+	background: #ffda6a;
+}
+
+.emoji__wow {
+	background: #ffda6a;
+}
+
+.emoji__huhu {
+	background: #ffda6a;
+}
+
+.emoji__angry {
+	background: #d5234c;
+}
+
+.emoji__like::after {
+	font-size: 11px !important;
+	margin-left: 3px;
+	content: 'Like';
+}
+
+.emoji__love::after {
+	font-size: 11px !important;
+	margin-left: 3px;
+	content: 'Love';
+}
+
+.emoji__haha::after {
+	font-size: 11px !important;
+	margin-left: 2px;
+	content: 'Haha';
+}
+
+.emoji__wow::after {
+	font-size: 11px !important;
+	content: 'Wow';
+}
+
+.emoji__huhu::after {
+	font-size: 11px !important;
+	content: 'Huhu';
+}
+
+.emoji__angry::after {
+	font-size: 11px !important;
+	content: 'Angry';
+}
+
+.emoji__popup {
+	cursor: pointer;
+}

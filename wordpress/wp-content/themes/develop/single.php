@@ -13,7 +13,10 @@
 get_header(); ?>
 <main class="app_container container">
     <div class="row">
-        <div class="col col-md-8">
+        <div class="col col-md-3">
+            <?php get_sidebar(); ?>
+        </div>
+        <div class="col col-md-6">
             <?php
             get_template_part( 'template-parts/global', 'breadcrumbs' );
 
@@ -28,8 +31,8 @@ get_header(); ?>
             get_template_part( 'template-parts/section', 'related-posts-by-category' );
             ?>
         </div>
-        <div class="col col-md-4">
-            <?php get_sidebar(); ?>
+        <div class="col col-md-3">
+            <?php mp_get_template_user(); ?>
         </div>
     </div>
 </main>
