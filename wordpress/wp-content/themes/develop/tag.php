@@ -43,7 +43,7 @@ get_header(); ?>
             ?>
         </div>
         <div class="col col-md-3">
-            <?php /*get_sidebar();*/ ?>
+            <?php mp_get_template_user(); ?>
         </div>
     </div>
 </main>

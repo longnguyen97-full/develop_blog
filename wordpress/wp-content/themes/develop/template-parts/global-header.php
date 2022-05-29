@@ -20,6 +20,8 @@
 				<?php get_template_part( 'template-parts/global', 'navigation' ); ?>
 				<?php get_search_form(); ?>
 			</div>
+
+			<?php get_user_form(); ?>
 		</nav>
 	</div>
 </header>
