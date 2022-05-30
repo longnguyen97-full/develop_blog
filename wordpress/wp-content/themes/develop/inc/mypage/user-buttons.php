@@ -1,5 +1,5 @@
 <?php
-function mp_get_login_button()
+function mp_get_login_button_modal()
 {
 	?>
 	<!-- Button trigger modal -->
@@ -21,7 +21,7 @@ function mp_get_login_button()
 	<?php
 }
 
-function mp_get_user_form()
+function mp_get_user_buttons()
 {
 	if (!is_user_logged_in()) :
 		?>

@@ -21,7 +21,7 @@
 				<?php get_search_form(); ?>
 			</div>
 
-			<?php mp_get_user_form(); ?>
+			<?php mp_get_user_buttons(); ?>
 		</nav>
 	</div>
 </header>
