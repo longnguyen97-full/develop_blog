@@ -20,11 +20,9 @@ function mp_login_form($args = array())
 
         <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-primary btn-sm" value="Login">
 
-        <?php if (mp_is_logout_page()): ?>
-            <a href="/" role="button" class="btn btn-primary btn-sm">Go Home</a>
-        <?php else: ?>
-            <button type="button" class="btn btn-primary btn-sm" onclick="history.back()">Back</button>
-        <?php endif;?>
+        <?php if (!empty($args['redirect_back'])) :
+            echo mp_is_logout_page() ? '<a href="/" role="button" class="btn btn-primary btn-sm">Go Home</a>' : '<button type="button" class="btn btn-primary btn-sm" onclick="history.back()">Back</button>';
+        endif; ?>
 
         <input type="hidden" name="redirect_to" value="<?php echo $args['redirect_to']; ?>">
     </form>
@@ -34,31 +32,32 @@ function mp_login_form($args = array())
 function mp_hook_login_modal()
 {
     ?>
-	<!-- Modal -->
-	<div class="modal fade" id="loginModalCenter" tabindex="-1" role="dialog" aria-labelledby="loginModalCenterTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="loginModalLongTitle">Login</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<?php
-                    $args = array(
-                        'redirect'       => home_url( 'wp-login.php' ),
-                        'redirect_to'    => home_url(),
-                        'echo'           => true,
-                        'remember'       => true,
-                        'value_username' => NULL,
-                        'value_remember' => false
-                    );
-                    mp_login_form($args);
-                    ?>
-				</div>
-			</div>
-		</div>
-	</div>
-	<?php
+    <!-- Modal -->
+    <div class="modal fade" id="loginModalCenter" tabindex="-1" role="dialog" aria-labelledby="loginModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLongTitle">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <?php
+                $args = array(
+                    'redirect'       => home_url('wp-login.php'),
+                    'redirect_to'    => home_url(),
+                    'redirect_back'  => false,
+                    'echo'           => true,
+                    'remember'       => true,
+                    'value_username' => null,
+                    'value_remember' => false,
+                );
+                mp_login_form($args);
+                ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
 }

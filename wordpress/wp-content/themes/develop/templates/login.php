@@ -20,10 +20,11 @@ get_header();?>
         $args = array(
             'redirect'       => home_url( 'wp-login.php' ),
             'redirect_to'    => home_url(),
+            'redirect_back'  => true,
             'echo'           => true,
             'remember'       => true,
             'value_username' => NULL,
-            'value_remember' => false
+            'value_remember' => false,
         );
         mp_login_form( $args );
         ?>
