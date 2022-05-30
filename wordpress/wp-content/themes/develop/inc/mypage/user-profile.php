@@ -28,7 +28,7 @@ function mp_get_template_login_out()
     ?>
 	<div class="card">
 		<div class="card-body">
-			You need to login to view this content
+			You need to <?php mp_get_login_button(); ?> to view this content.
 		</div>
 	</div>
 	<?php
