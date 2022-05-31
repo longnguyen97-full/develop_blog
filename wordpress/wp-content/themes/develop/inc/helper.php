@@ -462,3 +462,23 @@ function wpdocs_maybe_hide_admin_bar() {
         show_admin_bar( false );
     }
 }
+
+/**
+ * Show nickname with author link instead of author display name
+ */
+add_filter( 'get_comment_author_link', function( $content ) {
+    return replace_between_anchor( $content, get_user_meta( get_comment_user_id(), 'nickname', true ) );
+}, 99 );
+
+function get_comment_user_id()
+{
+    global $comment;
+    return $comment->user_id;
+}
+
+function replace_between_anchor( $content, $replace )
+{
+    $pattern = '#(<a.*?>).*?(</a>)#';
+    $replace = "$1{$replace}$2";
+    return preg_replace($pattern, $replace, $content);
+}
