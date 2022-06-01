@@ -14,10 +14,9 @@ function mp_get_template_profile()
     ?>
 	<div class="card">
 		<div class="card-body">
-			<h6 class="card-subtitle mb-2 text-muted"><?php echo get_user_meta($user_id, 'nickname', true); ?></h6>
+			<h6 class="card-subtitle mb-3 text-muted"><?php echo get_user_meta($user_id, 'nickname', true); ?></h6>
 			<p class="card-text"><?php echo nl2br(get_the_author_meta('description')); ?></p>
-			<p class="card-text"><a href="mailto: <?php echo get_userdata($user_id)->user_email; ?>?subject = Contact Me&body = Message" class="card-link"><?php echo get_userdata($user_id)->user_email; ?></a></p>
-			<p class="card-text"><a href="<?php echo get_userdata($user_id)->user_url; ?>" class="card-link" target="blank">My site</a></p>
+			<p class="card-text">Website: <a href="<?php echo get_userdata($user_id)->user_url; ?>" class="card-link" target="blank"><?php echo get_userdata($user_id)->user_url; ?></a></p>
 		</div>
 	</div>
 	<?php
@@ -49,7 +48,6 @@ function user_profile_request()
 {
     $data['user_nickname'] = isset($_POST['user_nickname']) ? $_POST['user_nickname'] : '';
     $data['user_bio']      = isset($_POST['user_bio']) ? $_POST['user_bio'] : '';
-    $data['user_mail']     = isset($_POST['user_mail']) ? $_POST['user_mail'] : '';
     $data['user_site']     = isset($_POST['user_site']) ? $_POST['user_site'] : '';
 
     return $data;
@@ -62,7 +60,6 @@ function mp_user_profile_validate($data)
     $user_data = array(
         'nickname'    => $user_nickname,
         'description' => $user_bio,
-        'user_email'  => $user_mail,
         'user_url'    => $user_site,
     );
 

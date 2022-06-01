@@ -25,11 +25,6 @@ get_header();?>
 		</div>
 
 		<div class="form-group">
-			<label for="user_mail">My Email</label>
-			<input type="email" class="form-control" name="user_mail" id="user_mail" value="<?php echo esc_html($myemail); ?>">
-		</div>
-
-		<div class="form-group">
 			<label for="user_site">My Site</label>
 			<input type="url" class="form-control" name="user_site" id="user_site" value="<?php echo esc_html($mysite); ?>" pattern="https://.*" size="30">
 		</div>
