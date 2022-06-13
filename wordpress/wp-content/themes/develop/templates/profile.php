@@ -3,14 +3,13 @@
  * Template Name: User Profile
  */
 mp_prevent_user_non_logged_in();
+get_header();
 
 $user        = wp_get_current_user();
 $nickname    = get_user_meta($user->ID, 'nickname', true);
 $description = get_user_meta($user->ID, 'description', true);
-$myemail     = get_userdata($user->ID)->user_email;
 $mysite      = get_userdata($user->ID)->user_url;
-
-get_header();?>
+?>
 
 <div class="container my-3">
 	<form class="form-horizontal" method="POST" role="form">
