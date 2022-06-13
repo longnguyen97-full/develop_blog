@@ -18,7 +18,7 @@
 
 			<div class="collapse navbar-collapse" id="navbar_main">
 				<?php get_template_part( 'template-parts/global', 'navigation' ); ?>
-				<?php get_search_form(); ?>
+				<?php get_search_form_template(); ?>
 			</div>
 
 			<?php mp_get_user_buttons(); ?>
