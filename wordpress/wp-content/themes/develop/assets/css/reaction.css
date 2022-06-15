@@ -48,36 +48,42 @@
 .emoji__like::after {
 	font-size: 11px !important;
 	margin-left: 3px;
-	content: 'Like';
+	/*content*/: 'Like';
 }
 
 .emoji__love::after {
 	font-size: 11px !important;
 	margin-left: 3px;
-	content: 'Love';
+	/*content*/: 'Love';
 }
 
 .emoji__haha::after {
 	font-size: 11px !important;
 	margin-left: 2px;
-	content: 'Haha';
+	/*content*/: 'Haha';
 }
 
 .emoji__wow::after {
 	font-size: 11px !important;
-	content: 'Wow';
+	/*content*/: 'Wow';
 }
 
 .emoji__huhu::after {
 	font-size: 11px !important;
-	content: 'Huhu';
+	/*content*/: 'Huhu';
 }
 
 .emoji__angry::after {
 	font-size: 11px !important;
-	content: 'Angry';
+	/*content*/: 'Angry';
 }
 
 .emoji__popup {
 	cursor: pointer;
+}
+
+.liked {
+	background-color: #ffffff;
+	border-style: solid;
+	border-color: coral;
 }

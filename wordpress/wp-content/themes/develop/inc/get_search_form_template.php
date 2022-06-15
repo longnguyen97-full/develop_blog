@@ -60,7 +60,7 @@ function get_search_form_template()
 	}
 	@media only screen and (min-width: 1700px) {
 		#search_form {
-			left: 1300px;
+			left: 1272px;
 		}
 	}
 	</style>

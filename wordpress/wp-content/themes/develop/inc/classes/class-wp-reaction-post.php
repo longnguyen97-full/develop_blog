@@ -27,6 +27,10 @@ class ReactionPost
         $this->id        = $id;
         $this->post_type = $post_type;
 
+        // detect current user like or not, change background for like button
+        $has_like    = $this->hasLike(get_current_user_id(), $this->id, $this->post_type);
+        $this->liked = !empty($has_like) ? 'liked' : '';
+
         ?>
             <input type="hidden" class="set_data_post_id__emoji-<?php echo $post_type . '-' . $id; ?>" value="<?php echo $id; ?>">
             <input type="hidden" class="set_data_post_type__emoji-<?php echo $post_type . '-' . $id; ?>" value="<?php echo $post_type; ?>">
@@ -90,7 +94,8 @@ class ReactionPost
         // }
 
         // $total = count($emojis);
-        $this->viewReactionCounter($reactions, $total);
+        // $this->viewReactionCounter($reactions, $total);
+        
         $this->viewReaction();
     }
 
@@ -108,9 +113,7 @@ class ReactionPost
     {
         ?>
         <div class="reaction_counter mb-3">
-            <span class="reaction_by_user__emoji-<?php echo $this->post_type . '-' . $this->id; ?>">
-                <?php echo $this->getReactionByUser(); ?>
-            </span>
+            <span class="reaction_by_user__emoji-<?php echo $this->post_type . '-' . $this->id; ?>"></span>
             <!--
             <?php /*foreach ($reactions['emoji'] as $emoji) :*/;?>
                 <?php /*$this->getEmojiIcon($emoji);*/;?>
@@ -163,7 +166,7 @@ class ReactionPost
 
         ?>
         <div class="emoji__container my-3">
-            <div class="emoji emoji__like emoji-<?php echo $this->post_type . '-' . $this->id; ?>">
+            <div class="emoji emoji__like emoji-<?php echo $this->post_type . '-' . $this->id . ' ' . $this->liked; ?>">
                 <i class="fa-regular fa-thumbs-up"></i>
             </div>
             <!--
@@ -183,6 +186,11 @@ class ReactionPost
                 <i class="fa-regular fa-face-angry"></i>
             </div>
             -->
+            <div class="reaction_counter mb-3">
+                <span class="font-weight-bold reaction_by_user__emoji-<?php echo $this->post_type . '-' . $this->id; ?>">
+                    <?php echo $this->getReactionByUser(); ?>
+                </span>
+            </div>
         </div>
         <?php
 
@@ -190,6 +198,11 @@ class ReactionPost
 
     public function reactionAjaxCallback()
     {
+        if (!is_user_logged_in()) {
+            wp_send_json_success('[REQUIRE_LOGIN]');
+            die();
+        }
+
         $user_id   = get_current_user_id();
         $post_id   = isset($_POST['post_id']) ? $_POST['post_id'] : '';
         $post_type = isset($_POST['post_type']) ? $_POST['post_type'] : '';
@@ -200,6 +213,8 @@ class ReactionPost
         $executed = !empty($reaction_id) ? $this->unlike($reaction_id) : $this->like($user_id, $post_id, $post_type, $emoji);
 
         $message = $this->getReactionByUser($post_id, $post_type);
+
+        $message = !empty($message) ? $message : 'This post has not like yet';
 
         wp_send_json_success($message);
         die();
