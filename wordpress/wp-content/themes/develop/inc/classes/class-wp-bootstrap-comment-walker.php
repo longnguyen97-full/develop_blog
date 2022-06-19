@@ -56,7 +56,7 @@ class Bootstrap_Comment_Walker extends Walker_Comment {
 									'after'     => '</li>'
 								) ) );
 							?>
-							<li><?php get_reaction_template(get_comment_ID(), 'comment'); ?></li>
+							<li class="list-inline-item"><?php get_reaction_template(get_comment_ID(), 'comment'); ?></li>
 						</ul>
 					</div><!-- .comment-metadata -->
 				</div>

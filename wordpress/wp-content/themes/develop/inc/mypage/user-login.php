@@ -29,7 +29,7 @@ add_action('wp_logout', 'mp_user_logout');
 function mp_redirect_user($status = '')
 {
     $with_status = !empty($status) ? "?login={$status}" : '';
-    wp_redirect(home_url('/login/') . $with_status);
+    wp_redirect(home_url() . $with_status);
     exit;
 }
 

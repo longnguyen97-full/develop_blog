@@ -11,8 +11,11 @@
  */
 
 get_header(); ?>
-<main class="app_container container">
+<main class="app_container container-fluid">
     <div class="row">
+        <div class="col col-md-2">
+            <?php get_sidebar(); ?>
+        </div>
         <div class="col col-md-8">
             <?php
             get_template_part( 'template-parts/global', 'breadcrumbs' );
@@ -30,6 +33,7 @@ get_header(); ?>
                 endwhile;
 
                 the_bootstrap_paginate_links();
+                the_loadmore();
 
             else :
 
@@ -38,8 +42,8 @@ get_header(); ?>
             endif;
             ?>
         </div>
-        <div class="col col-md-4">
-            <?php get_sidebar(); ?>
+        <div class="col col-md-2">
+            <?php mp_get_template_user(); ?>
         </div>
     </div>
 </main>

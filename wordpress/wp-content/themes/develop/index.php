@@ -16,13 +16,15 @@
  */
 
 get_header(); ?>
-<main class="app_container container">
+<main class="app_container container-fluid">
     <div class="row">
-        <div class="col col-md-3">
+        <div class="col col-md-2">
             <?php get_sidebar(); ?>
         </div>
-        <div class="col col-md-6">
+        <div class="col col-md-8">
             <?php
+            get_search_form();
+
             if ( have_posts() ) :
 
                 while ( have_posts() ) : the_post();
@@ -42,7 +44,7 @@ get_header(); ?>
             endif;
             ?>
         </div>
-        <div class="col col-md-3">
+        <div class="col col-md-2">
             <?php mp_get_template_user(); ?>
         </div>
     </div>

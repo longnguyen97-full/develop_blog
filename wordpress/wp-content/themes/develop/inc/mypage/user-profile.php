@@ -5,7 +5,7 @@ function mp_get_template_user()
         return;
     }
 
-    return is_user_logged_in() ? mp_get_template_profile() : mp_get_template_login_out();
+    return is_user_logged_in() ? mp_get_template_profile() : '';
 }
 
 function mp_get_template_profile()
@@ -17,17 +17,6 @@ function mp_get_template_profile()
 			<h6 class="card-subtitle mb-3 text-muted"><?php echo get_user_meta($user_id, 'nickname', true); ?></h6>
 			<p class="card-text"><?php echo nl2br(get_the_author_meta('description')); ?></p>
 			<p class="card-text">Website: <a href="<?php echo get_userdata($user_id)->user_url; ?>" class="card-link" target="blank"><?php echo get_userdata($user_id)->user_url; ?></a></p>
-		</div>
-	</div>
-	<?php
-}
-
-function mp_get_template_login_out()
-{
-    ?>
-	<div class="card">
-		<div class="card-body">
-			You need to <?php mp_get_login_button_modal(); ?> to view this content.
 		</div>
 	</div>
 	<?php

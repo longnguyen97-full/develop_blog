@@ -18,7 +18,7 @@
 
 			<div class="collapse navbar-collapse" id="navbar_main">
 				<?php get_template_part( 'template-parts/global', 'navigation' ); ?>
-				<?php get_search_form_template(); ?>
+				<?php sf_toggle_search_button(); ?>
 			</div>
 
 			<?php mp_get_user_buttons(); ?>
@@ -26,7 +26,7 @@
 	</div>
 </header>
 <?php if ( get_header_image() ) : ?>
-	<div class="container text-center" id="site-header-image">
+	<div class="container text-center" id="site-header-image" style="display: none;">
 		<img src="<?php header_image(); ?>" class="img-fluid" width="<?php echo absint( get_custom_header()->width ); ?>" height="<?php echo absint( get_custom_header()->height ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
 	</div>
 <?php endif; ?>
