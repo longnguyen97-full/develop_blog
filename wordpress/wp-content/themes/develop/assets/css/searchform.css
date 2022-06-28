@@ -1,3 +1,7 @@
+#open_search_form {
+	padding: 7.5px;
+}
+
 #searchform {
 	display: none;
 }
@@ -6,4 +10,5 @@
 	border-radius: 5px;
 	padding-left: 9px;
 	padding-right: 9px;
+	margin-bottom: 3px;
 }

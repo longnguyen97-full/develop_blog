@@ -9,3 +9,4 @@ include get_parent_theme_file_path( '/inc/mypage/user-templates.php' );
 include get_parent_theme_file_path( '/inc/mypage/user-profile.php' );
 include get_parent_theme_file_path( '/inc/mypage/user-login.php' );
 include get_parent_theme_file_path( '/inc/mypage/user-registration.php' );
+include get_parent_theme_file_path( '/inc/mypage/user-login-errors.php' );
