@@ -29,10 +29,10 @@ switch ($_SERVER['SERVER_NAME']) {
         break;
 
     default:
-        $DB_NAME     = 'develop';
+        $DB_NAME     = 'blog_wp';
         $DB_USER     = 'root';
-        $DB_PASSWORD = 'adminadmin';
-        $DB_HOST     = 'localhost';
+        $DB_PASSWORD = 'cctmcctm';
+        $DB_HOST     = 'db.cba';
         break;
 }
 
