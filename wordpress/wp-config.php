@@ -24,8 +24,6 @@ switch ($_SERVER['SERVER_NAME']) {
         $DB_USER     = 'root';
         $DB_PASSWORD = 'Cba@123456';
         $DB_HOST     = 'localhost';
-        define( 'WP_HOME', 'http://'.$_SERVER['SERVER_NAME'] );
-        define( 'WP_SITEURL', 'http://'.$_SERVER['SERVER_NAME'] );
         break;
 
     default:
@@ -35,6 +33,8 @@ switch ($_SERVER['SERVER_NAME']) {
         $DB_HOST     = 'db.cba';
         break;
 }
+define( 'WP_HOME', 'http://'.$_SERVER['SERVER_NAME'] );
+define( 'WP_SITEURL', 'http://'.$_SERVER['SERVER_NAME'] );
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
@@ -107,11 +107,8 @@ define( 'WP_DEBUG', false );
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', __DIR__ . '/' );
+    define( 'ABSPATH', __DIR__ . '/' );
 }
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
-
-define( 'WP_HOME', 'http://localhost' );
-define( 'WP_SITEURL', 'http://localhost' );
