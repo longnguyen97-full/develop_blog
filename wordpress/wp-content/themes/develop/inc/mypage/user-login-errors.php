@@ -1,22 +1,21 @@
 <?php
-mp_detect_errors();
 function mp_detect_errors()
 {
-	$login_status = $_GET['login'] ?: '';
-	if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()):
-	?>
-	<input type="text" id="login_status" value="<?php echo $login_status; ?>">
-	<?php
+	$params = array();
+	if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
+		$params = array(
+			'login_status' => $_GET['login'] ?: '',
+			'register_status' => $_POST['register_submit'] ?: '',
+		);
+	}
 
-	$register_status = $_POST['register_submit'] ?: '';
-	?>
-	<input type="text" id="register_status" value="<?php echo $register_status; ?>">
-	<?php
-	endif;
+	return $params;
 }
 
 function mp_load_scripts( $hook )
 {
+	$params = mp_detect_errors();
 	wp_enqueue_script(TEXT_DOMAIN . '-loginform-script', getAssets() . '/js/loginform.js', array('jquery'), wp_get_theme()->get('Version'), true);
+	wp_add_inline_script(TEXT_DOMAIN . '-loginform-script', 'var params = ' . wp_json_encode( $params ), 'before');
 }
 add_action('wp_enqueue_scripts', 'mp_load_scripts');
