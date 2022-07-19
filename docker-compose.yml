@@ -1,0 +1,57 @@
+version: "4.0"
+
+services:
+  db.cba:
+    image: mysql:latest
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: cctmcctm
+      MYSQL_DATABASE: blog_wp
+      MYSQL_PASSWORD: cctmcctm
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+
+  ungit:
+    image: miebach/ungit
+    restart: always
+    ports:
+      - "8448:8448"
+    volumes:
+      - ./:/data/vhosts/
+      # - ./docker/git/.ssh:/home/node/.ssh
+      - ./docker/git/.gitconfig:/home/node/.gitconfig
+    depends_on:
+      - wordpress
+
+  app:
+    build:
+      dockerfile: ./docker/Dockerfile
+
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - "80:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db.cba:3306
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: cctmcctm
+    working_dir: /var/www/html
+    volumes:
+      - ./wordpress/wp-content:/var/www/html/wp-content
+      - ./wordpress/wp-config.php:/var/www/html/wp-config.php
+      - ./.git:/var/www/html/.git
+      - ./docker/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./docker/nginx/app.conf:/etc/nginx/conf.d/app.conf
+      - ./docker/nginx_log:/var/log/nginx
+      - ./docker/php-fpm/php-fpm.log:/var/log/php-fpm.log
+    depends_on:
+      - db.cba
+volumes:
+  db_data:
