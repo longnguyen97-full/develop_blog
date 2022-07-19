@@ -11,7 +11,7 @@ $description = get_user_meta($user->ID, 'description', true);
 $mysite      = get_userdata($user->ID)->user_url;
 ?>
 
-<div class="container my-3">
+<div class="container my-3 mt-5">
 	<form class="form-horizontal" method="POST" role="form">
 		<div class="form-group">
 			<label for="user_nickname">Nickname</label>
