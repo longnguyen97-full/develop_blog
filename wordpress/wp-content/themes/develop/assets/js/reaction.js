@@ -1,18 +1,18 @@
 jQuery(function($) {
     $(".emoji").click(function() {
         emoji_hook = $(this).attr("class").split(" ")[2];
+        parent     = ".emoji__container";
+        find       = ".reaction_counter";
 
-        reaction_counter = $(".reaction_counter").children("span");
+        reaction_counter = $("."+emoji_hook).closest(parent).find(find)
         reaction_counter_int = parseInt($.trim( reaction_counter.text() ));
 
         if ($(this).hasClass("liked")) {
             $(this).removeClass("liked");
             flag_reaction = false;
-            reaction_counter.text( reaction_counter_int - 1 );
         } else {
             $(this).addClass("liked")
             flag_reaction = true;
-            reaction_counter.text( reaction_counter_int + 1 );
         }
 
         ajax_reaction(emoji_hook, 'like', flag_reaction);
@@ -35,10 +35,11 @@ jQuery(function($) {
             success: function(response) {
                 data = response.data;
                 if (data == '[REQUIRE_LOGIN]') {
-                    alert('You have to login to like post');
+                    alert('You are not currently logged in.');
                 } else {
+                    reaction_counter_int = $("."+emoji_hook).hasClass("liked") ? reaction_counter_int + 1 : reaction_counter_int - 1;
+                    reaction_counter.text( reaction_counter_int ).css("font-weight", "bold");
                     $(".reaction_by_user__" + emoji_hook).html(data);
-                    
                 }
             }
         });

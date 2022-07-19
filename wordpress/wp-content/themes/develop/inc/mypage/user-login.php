@@ -1,4 +1,15 @@
 <?php
+function mp_user_login_success( $url, $request, $user )
+{
+    if (!empty(mp_is_user_screen())) {
+        mp_redirect_user('success');
+        exit;
+    }
+
+    return $url;
+}
+add_filter( 'login_redirect', 'mp_user_login_success', 10, 3 );
+
 function mp_user_login_failed()
 {
     if (!empty(mp_is_user_screen())) {
@@ -20,7 +31,7 @@ add_filter('authenticate', 'mp_user_login_empty', 1, 3);
 function mp_user_logout()
 {
     if (!empty(mp_is_user_screen())) {
-        mp_redirect_user('false');
+        mp_redirect_user('logout');
         exit;
     }
 }
@@ -29,7 +40,9 @@ add_action('wp_logout', 'mp_user_logout');
 function mp_redirect_user($status = '')
 {
     $with_status = !empty($status) ? "?login={$status}" : '';
-    wp_redirect(home_url() . $with_status);
+    $url_ref     = $_SERVER['HTTP_REFERER'];
+    $url         = strpos($url_ref, '?login=') !== false ? strstr($url_ref, '?login=', true) : $url_ref;
+    wp_redirect($url . '/' . $with_status);
     exit;
 }
 
