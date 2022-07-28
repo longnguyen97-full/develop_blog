@@ -431,3 +431,54 @@ function theme_show_widget( $index, $id )
 
     return $did_one;
 }
+
+/**
+ * Load more post
+ */
+function the_loadmore()
+{
+    $LoadmorePosts = new LoadmorePosts();
+    $LoadmorePosts->loadmoreButton();
+}
+
+/**
+ * Reaction blog, comment
+ * @param integer $id (blog_id, comment_id)
+ */
+function get_reaction_template($id = 0, $post_type = 'post')
+{
+    $ReactionPost = new ReactionPost();
+    $ReactionPost->setData($id, $post_type);
+    $ReactionPost->getData();
+}
+
+/**
+ * Hide admin toolbar with non-admin accounts
+ */
+add_action( 'wp', 'wpdocs_maybe_hide_admin_bar' );
+add_action( 'admin_init', 'wpdocs_maybe_hide_admin_bar', 9 );
+function wpdocs_maybe_hide_admin_bar() {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        show_admin_bar( false );
+    }
+}
+
+/**
+ * Show nickname with author link instead of author display name
+ */
+add_filter( 'get_comment_author_link', function( $content ) {
+    return replace_between_anchor( $content, get_user_meta( get_comment_user_id(), 'nickname', true ) );
+}, 99 );
+
+function get_comment_user_id()
+{
+    global $comment;
+    return $comment->user_id;
+}
+
+function replace_between_anchor( $content, $replace )
+{
+    $pattern = '#(<a.*?>).*?(</a>)#';
+    $replace = "$1{$replace}$2";
+    return preg_replace($pattern, $replace, $content);
+}

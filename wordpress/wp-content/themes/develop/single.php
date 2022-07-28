@@ -11,10 +11,15 @@
  */
 
 get_header(); ?>
-<main class="app_container container">
+<main class="app_container container-fluid">
     <div class="row">
+        <div class="col col-md-2">
+            <?php get_sidebar(); ?>
+        </div>
         <div class="col col-md-8">
             <?php
+            get_search_form();
+
             get_template_part( 'template-parts/global', 'breadcrumbs' );
 
             while ( have_posts() ) : the_post();
@@ -28,8 +33,8 @@ get_header(); ?>
             get_template_part( 'template-parts/section', 'related-posts-by-category' );
             ?>
         </div>
-        <div class="col col-md-4">
-            <?php get_sidebar(); ?>
+        <div class="col col-md-2">
+            <?php mp_get_template_user(); ?>
         </div>
     </div>
 </main>

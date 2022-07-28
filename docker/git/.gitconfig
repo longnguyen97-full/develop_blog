@@ -1,0 +1,7 @@
+[user]
+	name = Liam
+	email = liam@cybridge.jp
+	username = liam
+
+[http]
+	sslVerify = false

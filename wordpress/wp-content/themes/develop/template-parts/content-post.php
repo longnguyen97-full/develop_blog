@@ -73,6 +73,8 @@
 		<?php the_content(); ?>
 	</div>
 
+	<?php get_reaction_template(get_the_ID(), 'post'); ?>
+
 	<div class="link-pages mb-3">
 		<?php
 		wp_link_pages(

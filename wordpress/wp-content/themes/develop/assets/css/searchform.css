@@ -1,0 +1,10 @@
+#searchform {
+	display: none;
+}
+
+#searchform #searchsubmit {
+	border-radius: 5px;
+	padding-left: 9px;
+	padding-right: 9px;
+	margin-bottom: 3px;
+}

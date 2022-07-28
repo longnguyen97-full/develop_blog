@@ -18,18 +18,36 @@
  * @package WordPress
  */
 
+switch ($_SERVER['SERVER_NAME']) {
+    case 'blog.wordpress.vm':
+        $DB_NAME     = 'blog_wordpress_vm';
+        $DB_USER     = 'root';
+        $DB_PASSWORD = 'Cba@123456';
+        $DB_HOST     = 'localhost';
+        break;
+
+    default:
+        $DB_NAME     = 'blog_wp';
+        $DB_USER     = 'root';
+        $DB_PASSWORD = 'cctmcctm';
+        $DB_HOST     = 'db.cba';
+        break;
+}
+define( 'WP_HOME', 'http://'.$_SERVER['SERVER_NAME'] );
+define( 'WP_SITEURL', 'http://'.$_SERVER['SERVER_NAME'] );
+
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'develop' );
+define( 'DB_NAME', $DB_NAME );
 
 /** Database username */
-define( 'DB_USER', 'root' );
+define( 'DB_USER', $DB_USER );
 
 /** Database password */
-define( 'DB_PASSWORD', 'adminadmin' );
+define( 'DB_PASSWORD', $DB_PASSWORD );
 
 /** Database hostname */
-define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', $DB_HOST );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -89,7 +107,7 @@ define( 'WP_DEBUG', false );
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', __DIR__ . '/' );
+    define( 'ABSPATH', __DIR__ . '/' );
 }
 
 /** Sets up WordPress vars and included files. */

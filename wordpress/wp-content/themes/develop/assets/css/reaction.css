@@ -1,0 +1,27 @@
+.emoji__container {
+	display: flex;
+}
+
+.emoji {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.emoji i:hover {
+	color: #548dff;
+}
+
+.emoji__like:after {
+	font-size: 11px !important;
+	margin-left: 3px;
+}
+
+.emoji__popup {
+	cursor: pointer;
+}
+
+.liked i {
+	color: #548dff;
+}

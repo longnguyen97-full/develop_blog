@@ -104,7 +104,11 @@ if ( post_password_required() ) {
         'id_submit' => __( 'comment-submit', 'themestandard' ),
         'class_submit' => 'submit btn btn-light'
     );
-    comment_form( $comments_args );
+    if ( is_user_logged_in() ) {
+        comment_form( $comments_args );
+    } else {
+        echo '<div class="alert alert-primary" role="alert">You are not currently logged in.</div>';
+    }
     ?>
 
 </div><!-- #comments -->

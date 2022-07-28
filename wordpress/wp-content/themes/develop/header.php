@@ -20,3 +20,5 @@
 <?php wp_body_open(); ?>
 <div id="app">
     <?php get_template_part( 'template-parts/global', 'header' ); ?>
+    <?php mp_hook_modals(); ?>
+    <br><br>
