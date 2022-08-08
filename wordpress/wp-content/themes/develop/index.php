@@ -34,7 +34,6 @@ get_header(); ?>
                 endwhile;
                 wp_reset_postdata();
 
-                the_bootstrap_paginate_links();
                 the_loadmore();
 
             else :

@@ -34,7 +34,6 @@ get_header(); ?>
 
                 endwhile;
 
-                the_bootstrap_paginate_links();
                 the_loadmore();
 
             else :
