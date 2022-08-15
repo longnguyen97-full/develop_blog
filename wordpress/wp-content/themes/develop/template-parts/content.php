@@ -44,7 +44,6 @@
         </div>
         <div class="article-text">
             <?php the_excerpt(); ?>
-            <a href="<?php the_permalink(); ?>"><?php _e('Continue reading', 'themestandard'); ?></a>
         </div>
     </div>
 </article><!-- .post -->
