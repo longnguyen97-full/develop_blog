@@ -1,0 +1,15 @@
+.emoji__container {
+	float: left;
+}
+
+.duration_time {
+	float: right;
+}
+
+.strong {
+	font-weight: bold;
+}
+
+.break_float_flow {
+	clear: both;
+}

@@ -74,8 +74,11 @@
 	</div>
 
 	<?php get_reaction_template(get_the_ID(), 'post'); ?>
+	<div class="duration_time strong">
+		<?php echo get_duration_reading( get_the_content() ); ?>
+	</div>
 
-	<div class="link-pages mb-3">
+	<div class="link-pages break_float_flow">
 		<?php
 		wp_link_pages(
 			array(

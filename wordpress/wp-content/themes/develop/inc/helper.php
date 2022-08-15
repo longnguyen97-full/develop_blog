@@ -463,3 +463,21 @@ function replace_between_anchor( $content, $replace )
     $replace = "$1{$replace}$2";
     return preg_replace($pattern, $replace, $content);
 }
+
+/**
+ * Counting words in text
+ */
+function count_words( $text )
+{
+    return sizeof(explode(' ', $text));
+}
+
+function get_duration_reading( $post_content )
+{
+    $words = count_words( $post_content );
+    if ( $words < 350 ) {
+        return 'Duration: less than 1 minute';
+    }
+
+    return 'Duration: ' . round( $words / 350 ) . ' minutes';
+}
