@@ -402,6 +402,26 @@ function the_loadmore()
     $LoadmorePosts->loadmoreButton();
 }
 
+function count_loaded_posts( $post = 0 )
+{
+    $post = !empty($post) ? $post : get_the_ID();
+    if ( empty($post) ) {
+        return;
+    }
+
+    session_start();
+    $_SESSION['loaded_posts'] = ! empty( $_SESSION['loaded_posts'] ) ? $_SESSION['loaded_posts'] + 1 : 1;
+}
+
+function get_loaded_posts()
+{
+    session_start();
+    $loaded_post = isset($_SESSION['loaded_posts']) ? $_SESSION['loaded_posts'] : 0;
+    unset($_SESSION['loaded_posts']);
+
+    return $loaded_post;
+}
+
 /**
  * Reaction blog, comment
  * @param integer $id (blog_id, comment_id)

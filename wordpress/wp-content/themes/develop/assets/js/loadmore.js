@@ -1,14 +1,19 @@
 jQuery(function($) {
-    var current_page = 0;
+    var current_page = parseInt(loadmore_params.current_page) + 1;
     var offset       = 10;
+    var default_loaded_posts = 10;
 
     $('.loadmore_button').click(function() {
 
         var button = $(this);
+        var posts  = button.text().match(/\d+/); // get number of post from text of button
+        var loaded_posts = $(".loaded_posts").text().match(/\d+/);
 
-        if (loadmore_params.current_page > 1) {
-            current_page = loadmore_params.current_page;
-            offset       = loadmore_params.current_page * 10;
+        posts        = parseInt(posts[0]);
+        loaded_posts = loaded_posts !== null ? parseInt(loaded_posts[0]) : default_loaded_posts;
+
+        if (current_page > 1) {
+            offset = current_page * 10;
         }
 
         $.ajax({
@@ -16,7 +21,7 @@ jQuery(function($) {
             data: {
                 action: 'loadmore',
                 query: loadmore_params.posts,
-                page: loadmore_params.current_page,
+                page: current_page,
                 offset: offset,
             },
             type: 'POST',
@@ -25,10 +30,15 @@ jQuery(function($) {
             },
             success: function(data) {
                 if (data) {
-                    button.text('More posts').prev().before(data);
-                    loadmore_params.current_page++;
-                    offset = offset + 5;
-                    if (loadmore_params.current_page == loadmore_params.max_page) {
+                    remaining_posts = posts - loaded_posts;
+                    remaining_posts = remaining_posts > 0 ? remaining_posts : 0;
+                    button.text('More posts (' + remaining_posts + ' Posts)').prev().after(data);
+                    current_page++;
+                    offset = offset + 10;
+                    if (remaining_posts == 0) {
+                        button.remove();
+                    }
+                    if (current_page == loadmore_params.max_page) {
                         button.remove();
                     }
                 } else {

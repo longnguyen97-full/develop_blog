@@ -12,6 +12,7 @@ class LoadmorePosts
     {
         global $wp_query;
         $this->wp_query = $wp_query;
+
         add_action('wp_enqueue_scripts', array($this, 'loadScripts'));
         add_action('wp_ajax_loadmore', array($this, 'loadmoreAjaxCallback'));
         add_action('wp_ajax_nopriv_loadmore', array($this, 'loadmoreAjaxCallback'));
@@ -34,6 +35,7 @@ class LoadmorePosts
         wp_register_script(TEXT_DOMAIN . '-loadmore-script', getAssets() . '/js/loadmore.js', array('jquery'), wp_get_theme()->get('Version'), true);
         wp_localize_script(TEXT_DOMAIN . '-loadmore-script', 'loadmore_params', array(
             'ajaxurl'      => site_url() . '/wp-admin/admin-ajax.php',
+            'loaded_posts' => get_loaded_posts(),
             'posts'        => json_encode($this->wp_query->query_vars),
             'current_page' => $this->queryVar('paged'),
             'max_page'     => $this->queryVar('max_num_pages', true),
@@ -45,8 +47,12 @@ class LoadmorePosts
     {
         $current_page = $this->queryVar('paged');
         $max_page     = $this->queryVar('max_num_pages', true);
+        $total_posts  = wp_count_posts()->publish;
+        $loaded_posts = get_loaded_posts();
+        $remaining_posts = $total_posts - $loaded_posts;
+
         if ( $max_page > 1 && $max_page !== $current_page ) {
-            echo '<div class="loadmore_button">More posts</div>';
+            echo "<div class='loadmore_button'>More posts ({$remaining_posts} Posts)</div>";
         }
     }
 
@@ -54,9 +60,10 @@ class LoadmorePosts
     {
         $args                   = isset($_POST['query']) ? json_decode( stripslashes( $_POST['query'] ), true ) : array();
         $args['paged']          = (int) isset($_POST['page']) ? $_POST['page'] + 1 : 0;
-        $args['post_status']    = 'publish';
         $args['offset']         = (int) isset($_POST['offset']) ? $_POST['offset'] : 0;
-        $args['posts_per_page'] = 5;
+        $args['posts_per_page'] = 10;
+        $args['post_status']    = 'publish';
+        $args['post__not_in']   = get_option( 'sticky_posts' );
 
         query_posts( $args );
 
@@ -66,9 +73,15 @@ class LoadmorePosts
 
                 get_template_part( 'template-parts/content' );
 
+                count_loaded_posts();
+
             endwhile;
 
+            $loaded_posts = get_loaded_posts();
+            echo "<div class='loaded_posts hide'>Loaded More Posts ({$loaded_posts} Posts)</div>";
+
         endif;
+
         die;
     }
 }

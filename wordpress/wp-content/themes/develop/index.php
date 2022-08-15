@@ -31,6 +31,8 @@ get_header(); ?>
 
                     get_template_part( 'template-parts/content' );
 
+                    count_loaded_posts();
+
                 endwhile;
                 wp_reset_postdata();
 
