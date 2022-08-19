@@ -1,3 +1,9 @@
+:root {
+	--profile-bio-color: #ffffff;
+	--profile-cover-color: rgb(245,244,244);
+	--profile-brand-color: #280331;
+}
+
 .emoji__container {
 	float: left;
 }
@@ -12,4 +18,8 @@
 
 .break_float_flow {
 	clear: both;
+}
+
+.navbar-brand img {
+  max-width: 35px;"
 }

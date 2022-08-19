@@ -47,7 +47,16 @@ class LoadmorePosts
     {
         $current_page = $this->queryVar('paged');
         $max_page     = $this->queryVar('max_num_pages', true);
+
+        // Count total posts in order to specific page
         $total_posts  = wp_count_posts()->publish;
+        $category     = $this->queryVar('cat');
+        $tag          = $this->queryVar('tag_id');
+        $author       = $this->queryVar('author');
+        $total_posts  = $category ? count_cat_posts($category) : $total_posts;
+        $total_posts  = $tag ? count_tag_posts($tag) : $total_posts;
+        $total_posts  = $author ? count_author_posts($author) : $total_posts;
+
         $loaded_posts = get_loaded_posts();
         $remaining_posts = $total_posts - $loaded_posts;
 
@@ -63,7 +72,7 @@ class LoadmorePosts
         $args['offset']         = (int) isset($_POST['offset']) ? $_POST['offset'] : 0;
         $args['posts_per_page'] = 10;
         $args['post_status']    = 'publish';
-        $args['post__not_in']   = get_option( 'sticky_posts' );
+        $args['post__not_in']   = is_home() ? get_option( 'sticky_posts' ) : '';
 
         query_posts( $args );
 

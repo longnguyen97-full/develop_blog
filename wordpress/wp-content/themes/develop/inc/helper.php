@@ -423,6 +423,30 @@ function get_loaded_posts()
 }
 
 /**
+ * Count posts by taxonomy, author,...
+ */
+function custom_count_posts($args = array())
+{
+    $default_args = array('posts_per_page' => -1 );
+    return count( get_posts( array_merge( $args, $default_args ) ) );
+}
+
+function count_cat_posts($category)
+{
+    return custom_count_posts( array('cat' => $category) );
+}
+
+function count_tag_posts($tag)
+{
+    return custom_count_posts( array('tag_id' => $tag) );
+}
+
+function count_author_posts($author)
+{
+    return custom_count_posts( array('author' => $author) );
+}
+
+/**
  * Reaction blog, comment
  * @param integer $id (blog_id, comment_id)
  */
@@ -481,3 +505,40 @@ function get_duration_reading( $post_content )
 
     return 'Duration: ' . round( $words / 350 ) . ' minutes';
 }
+
+/**
+ * Get image from images folder
+ */
+function get_image($image)
+{
+    return THEME_ASSETS . '/images/' . $image;
+}
+
+/**
+ * Author functions
+ */
+function get_the_author_comments()
+{
+    $author   = get_the_author_meta('display_name');
+    $comments = get_comments();
+
+    $total_comment = 0;
+    foreach ($comments as $comment) {
+        if ($comment->comment_author == $author) {
+            $total_comment++;
+        }
+    }
+
+    return $total_comment;
+}
+
+function get_the_author_liked_posts()
+{
+    global $wpdb;
+
+    $author  = get_the_author_id();
+    $query   = "SELECT COUNT(user_id) FROM wp_reactions WHERE post_type = 'post' AND user_id = {$author}";
+
+    return $wpdb->get_var($query);
+}
+
