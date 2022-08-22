@@ -1,0 +1,11 @@
+.form_bookmark {
+	display: inline-block;
+}
+
+.marked {
+	background-color: #548dff;
+}
+
+.unmarked:hover {
+	background-color: #548dff;
+}

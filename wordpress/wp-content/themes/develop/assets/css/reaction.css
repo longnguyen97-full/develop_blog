@@ -1,5 +1,6 @@
 .emoji__container {
 	display: flex;
+	height: 16px;
 }
 
 .emoji {

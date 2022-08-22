@@ -458,6 +458,30 @@ function get_reaction_template($id = 0, $post_type = 'post')
 }
 
 /**
+ * Get data of field form table
+ * @param string $field
+ * @param string $table
+ */
+function get_data_from_table($field = '', $table = '', $where = array())
+{
+    global $wpdb;
+    $table = strpos($table, 'wp_') !== false ? $table : $wpdb->prefix . $table;
+    if ( !empty($where) ) {
+        $key   = end(array_keys($where)) ?: '';
+        $value = end(array_values($where)) ?: '';
+        $where = "{$key} = '{$value}'";
+    }
+    $query = !empty( $where ) ? "SELECT {$field} FROM {$table} WHERE {$where}" : "SELECT {$field} FROM {$table}";
+    $posts = $wpdb->get_results( $wpdb->prepare( $query ) );
+
+    foreach ( $posts as $post ) {
+        $post_ids[] = $post->post_id;
+    }
+
+    return !empty($post_ids) ? new WP_Query( array('post__in' => $post_ids, 'post__not_in' => get_option( 'sticky_posts' )) ) : false;
+}
+
+/**
  * Hide admin toolbar with non-admin accounts
  */
 add_action( 'wp', 'wpdocs_maybe_hide_admin_bar' );
@@ -542,3 +566,11 @@ function get_the_author_liked_posts()
     return $wpdb->get_var($query);
 }
 
+/**
+ * Bookmark button
+ */
+function get_bookmark_template()
+{
+    $BookmarkPost = new BookmarkPost();
+    $BookmarkPost->bookmarkForm();
+}
