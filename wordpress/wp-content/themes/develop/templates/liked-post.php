@@ -2,7 +2,7 @@
 /**
  * Template Name: Liked-Post
  */
-mp_prevent_user_non_logged_in();
+mp_prevent_user_non_logged_in( 'login' );
 get_header();
 
 $the_query = get_data_from_table('post_id', 'reactions', array('post_type' => 'post'));

@@ -2,7 +2,7 @@
 /**
  * Template Name: Bookmark
  */
-mp_prevent_user_non_logged_in();
+mp_prevent_user_non_logged_in( 'login' );
 get_header();
 
 $the_query = get_data_from_table('post_id', 'bookmarks', array('user_id' => get_current_user_id()));

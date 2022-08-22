@@ -7,10 +7,11 @@ function mp_prevent_user_logged_in()
     }
 }
 
-function mp_prevent_user_non_logged_in()
+function mp_prevent_user_non_logged_in($url = '')
 {
+    $url = !empty($url) ? $url : home_url();
     if (!is_user_logged_in()) {
-        wp_redirect(home_url());
+        wp_redirect($url);
         exit;
     }
 }
