@@ -42,6 +42,8 @@ function mp_redirect_user($status = '')
     $with_status = !empty($status) ? "?login={$status}" : '';
     $url_ref     = $_SERVER['HTTP_REFERER'];
     $url         = strpos($url_ref, '?login=') !== false ? strstr($url_ref, '?login=', true) : $url_ref;
+    $url         = $status == 'success' ? str_replace('/login', '/', $url) : $url;
+    $url         = $status == 'logout' ? home_url('/login') : $url;
     wp_redirect($url . '/' . $with_status);
     exit;
 }
