@@ -1,0 +1,20 @@
+/**
+ * Style latest comment block at sidebar
+ */
+ol.wp-block-latest-comments {
+	padding: 20px;
+}
+
+ol.wp-block-latest-comments::before {
+	content: "Latest Comment";
+	font-weight: bold;
+	font-size: 22px;
+}
+
+ol.wp-block-latest-comments li {
+	border-bottom: none;
+}
+
+ol.wp-block-latest-comments li:first-child {
+	margin-top: 15px;
+}
