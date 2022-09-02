@@ -47,6 +47,7 @@ get_header(); ?>
         </div>
         <div class="col col-md-2">
             <?php mp_get_template_user(); ?>
+            <?php get_sidebar( 'sub' ); ?>
         </div>
     </div>
 </main>
