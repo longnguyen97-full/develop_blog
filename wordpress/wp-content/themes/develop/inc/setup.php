@@ -372,6 +372,9 @@ function theme_add_scripts_styles() {
     // Author profile stylesheet
     wp_enqueue_style( TEXT_DOMAIN . '-author-profile', getAssets() . '/css/author-profile.css', array(), wp_get_theme()->get( 'Version' ) );
 
+    // Article stylesheet
+    wp_enqueue_style( TEXT_DOMAIN . '-article-profile', getAssets() . '/css/article.css', array(), wp_get_theme()->get( 'Version' ) );
+
     // Fontawesome
     wp_enqueue_style( TEXT_DOMAIN . '-fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css', array(), wp_get_theme()->get( 'Version' ) );
 
