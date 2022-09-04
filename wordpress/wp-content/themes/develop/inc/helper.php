@@ -461,6 +461,7 @@ function get_reaction_template($id = 0, $post_type = 'post')
  * Get data of field form table
  * @param string $field
  * @param string $table
+ * @return query object for the loop
  */
 function get_data_from_table($field = '', $table = '', $where = array())
 {
@@ -573,4 +574,35 @@ function get_bookmark_template()
 {
     $BookmarkPost = new BookmarkPost();
     $BookmarkPost->bookmarkForm();
+}
+
+/**
+ * Count total view of post
+ */
+function count_post_view()
+{
+    $CountPostView = new CountPostView();
+    $CountPostView->count();
+}
+
+/**
+ * Get post_ids from wp_count_post_view table
+ * Get post objects from post_ids
+ */
+function get_posts_view( $get_by_date = '' )
+{
+    $CountPostView = new CountPostView();
+    $CountPostView->setData( $get_by_date );
+    return $CountPostView->getPostsView();
+}
+
+/**
+ * Get values of certain field from array objects and return new array
+ * @param  array  $object_array   an array contain objects
+ * @param  string $expected_value a expected field
+ * @return array                  return an array contain values of certain field
+ */
+function extractValueFromObjectArray( $object_array = array(), $expected_value = '' )
+{
+    return array_column( $object_array, $expected_value );
 }

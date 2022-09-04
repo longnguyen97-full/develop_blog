@@ -10,7 +10,9 @@
  * @version 1.0
  */
 
-get_header(); ?>
+get_header();
+
+count_post_view(); ?>
 <main class="app_container container-fluid">
     <div class="row">
         <div class="col col-md-2">
