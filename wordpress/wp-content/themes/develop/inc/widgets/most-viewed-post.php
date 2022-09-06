@@ -17,8 +17,6 @@ class theme_widget_most_viewed_post extends WP_Widget
 
     public function widget( $args, $instance )
     {
-        $this->toggleTab();
-
         $weekly_posts  = get_posts_view( '1 week ago' );
         $monthly_posts = get_posts_view( '1 month ago' );
 
@@ -29,10 +27,10 @@ class theme_widget_most_viewed_post extends WP_Widget
 
             <ul class="nav nav-pills nav-fill">
                 <li class="nav-item">
-                    <a class="nav-link tabs-1 active" data-tab="tabs-1" aria-current="page" href="#tabs-1">Weekly</a>
+                    <a class="nav-link tabs-1 most-viewed-post active" data-tab="tabs-1" aria-current="page" href="#tabs-1">Weekly</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link tabs-2" data-tab="tabs-2" href="#tabs-2">Monthly</a>
+                    <a class="nav-link tabs-2 most-viewed-post" data-tab="tabs-2" href="#tabs-2">Monthly</a>
                 </li>
             </ul>
 
@@ -71,34 +69,5 @@ class theme_widget_most_viewed_post extends WP_Widget
     {
         $instance = array();
         return $instance;
-    }
-
-    public function toggleTab()
-    {
-        ?>
-        <script>
-            $( function() {
-                $( "#tabs" ).tabs();
-                $( ".nav-link" ).click( function() {
-                    // 1. get current tab that just is clicked
-                    let tab = $( this );
-                    let new_tab = tab.data( 'tab' );
-
-                    // 2. toggle active state for 2 tabs
-                    let old_tab = localStorage.getItem( 'old_tab' );
-                    if ( old_tab !== new_tab ) {
-                        let tabClass = localStorage.getItem( 'old_tab' );
-                        $( "." + tabClass ).removeClass( 'active' );
-                    }
-
-                    // 3. save current tag to storage
-                    localStorage.setItem( 'old_tab', new_tab );
-
-                    // 4. active/deactive current tab
-                    tab.hasClass( 'active' ) ? tab.removeClass( 'active' ) : tab.addClass( 'active' );
-                } );
-            } );
-        </script>
-        <?php
     }
 }

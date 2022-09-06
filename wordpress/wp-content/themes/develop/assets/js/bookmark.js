@@ -1,10 +1,14 @@
 jQuery(function($) {
+    var is_submited = false;
     $(".button_bookmark").click(function() {
-    	$(".form_bookmark").submit( function(e) {
-    		e.preventDefault();
-    		ajax_bookmark();
-    	} );
-        $(this).hasClass('marked') ? $(this).removeClass('marked') : $(this).addClass('marked'); // fixing...
+        if ( is_submited === false ) {
+        	$(".form_bookmark").submit( function(e) {
+        		e.preventDefault();
+        		ajax_bookmark();
+                is_submited = true;
+        	} );
+        }
+        $(this).hasClass('marked') ? $(this).removeClass('marked').addClass('unmarked') : $(this).removeClass('unmarked').addClass('marked');
     });
 
     function ajax_bookmark()

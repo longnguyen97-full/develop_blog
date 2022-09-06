@@ -11,12 +11,17 @@ function mp_get_template_user()
 function mp_get_template_profile()
 {
     $user_id = wp_get_current_user()->ID;
+
+    $disable_1 = is_page( 'liked-posts' ) ? 'disabled' : '';
+    $disable_2 = is_page( 'bookmark' ) ? 'disabled' : '';
     ?>
 	<div class="card">
 		<div class="card-body">
 			<h6 class="card-subtitle mb-3 text-muted"><?php echo get_user_meta($user_id, 'nickname', true); ?></h6>
-			<p class="card-text"><?php echo nl2br(get_the_author_meta('description')); ?></p>
+			<p class="card-text"><?php echo nl2br(get_the_author_meta('description', $user_id)); ?></p>
 			<p class="card-text">Website: <a href="<?php echo get_userdata($user_id)->user_url; ?>" class="card-link" target="blank"><?php echo get_userdata($user_id)->user_url; ?></a></p>
+            <a href="/liked-posts/" class="btn btn-primary <?php echo $disable_1 ?>" role="button" aria-disabled="true">Liked Posts</a>
+            <a href="/bookmark/" class="btn btn-primary <?php echo $disable_2 ?>" role="button" aria-disabled="true">Bookmark</a>
 		</div>
 	</div>
 	<?php

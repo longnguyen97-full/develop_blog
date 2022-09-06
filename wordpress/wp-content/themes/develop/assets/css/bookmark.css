@@ -3,9 +3,13 @@
 }
 
 .marked {
-	background-color: #548dff;
+	color: #fff !important;
+	background-color: #007bff !important;
+	border-color: #007bff !important;
 }
 
 .unmarked:hover {
-	background-color: #548dff;
+	color: #fff;
+	background-color: #007bff;
+	border-color: #007bff;
 }

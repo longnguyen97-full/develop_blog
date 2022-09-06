@@ -23,3 +23,7 @@
 .navbar-brand img {
   max-width: 35px;"
 }
+
+.btn{
+	box-shadow: none !important
+}
