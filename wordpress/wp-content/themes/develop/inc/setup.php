@@ -338,8 +338,9 @@ function theme_add_scripts_styles() {
     }
 
     // bootstrap
-    wp_enqueue_style( TEXT_DOMAIN . '-bootstrap', get_stylesheet_directory_uri() . '/assets/css/bootstrap.min.css', array(), '4.5.3' );
-    wp_enqueue_script( TEXT_DOMAIN . '-bootstrap', get_stylesheet_directory_uri() . '/assets/js/bootstrap.bundle.min.js', array(), '4.5.3', false );
+    wp_enqueue_style( TEXT_DOMAIN . '-bootstrap', get_stylesheet_directory_uri() . '/assets/css/bootstrap.min.css', array(), '4.0.0' );
+    wp_enqueue_script( TEXT_DOMAIN . '-bootstrap', get_stylesheet_directory_uri() . '/assets/js/bootstrap.bundle.min.js', array(), '4.0.0', false );
+    wp_enqueue_script( TEXT_DOMAIN . '-popper', get_stylesheet_directory_uri() . '/assets/js/popper.js', array(), '4.0.0', false );
 
     if (is_page_template('templates/magazine.php')) {
         // slick
@@ -361,10 +362,12 @@ function theme_add_scripts_styles() {
 
     // Theme script.
     wp_enqueue_script( TEXT_DOMAIN . '-script', getAssets() . '/js/script.js', array(), wp_get_theme()->get( 'Version' ), true );
+    wp_enqueue_script( TEXT_DOMAIN . '-custom', getAssets() . '/js/custom.js', array(), wp_get_theme()->get( 'Version' ), true );
 
     // Theme stylesheet.
     wp_enqueue_style( TEXT_DOMAIN . '-theme', getAssets() . '/css/style.css', array(), wp_get_theme()->get( 'Version' ) );
     wp_enqueue_style( TEXT_DOMAIN . '-theme-main', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
+    wp_enqueue_style( TEXT_DOMAIN . '-responsive', getAssets() . '/css/responsive.css', array(), wp_get_theme()->get( 'Version' ) );
 
     // Custom theme stylesheet
     wp_enqueue_style( TEXT_DOMAIN . '-custom-theme', getAssets() . '/css/custom.css', array(), wp_get_theme()->get( 'Version' ) );
@@ -382,6 +385,7 @@ function theme_add_scripts_styles() {
     wp_enqueue_style( TEXT_DOMAIN . '-fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css', array(), wp_get_theme()->get( 'Version' ) );
 
     // jQuery UI
+    wp_enqueue_script( TEXT_DOMAIN . '-jquery-321', get_stylesheet_directory_uri() . '/assets/js/jquery-3.2.1.min.js', array(), '3.2.1', false );
     wp_enqueue_script( TEXT_DOMAIN . '-jquery-core', 'https://code.jquery.com/jquery-3.6.0.js', array(), wp_get_theme()->get( 'Version' ), true );
     wp_enqueue_script( TEXT_DOMAIN . '-jquery-ui', 'https://code.jquery.com/ui/1.13.2/jquery-ui.js', array(), wp_get_theme()->get( 'Version' ), true );
 
@@ -391,6 +395,19 @@ function theme_add_scripts_styles() {
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
     }
+
+    // plugins: font-awesome, owl-carousel, ytplayer, easing, masonry
+    wp_enqueue_style( TEXT_DOMAIN . '-font-awesome', get_stylesheet_directory_uri() . '/assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css', array(), '4.7.0' );
+    wp_enqueue_style( TEXT_DOMAIN . '-owl-carousel', get_stylesheet_directory_uri() . '/assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css', array(), '2.2.1' );
+    wp_enqueue_style( TEXT_DOMAIN . '-owl-default', get_stylesheet_directory_uri() . '/assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css', array(), '2.2.1' );
+    wp_enqueue_style( TEXT_DOMAIN . '-animate', get_stylesheet_directory_uri() . '/assets/plugins/OwlCarousel2-2.2.1/animate.css', array(), '2.2.1' );
+    wp_enqueue_style( TEXT_DOMAIN . '-YTPlayer', get_stylesheet_directory_uri() . '/assets/plugins/jquery.mb.YTPlayer-3.1.12/jquery.mb.YTPlayer.css', array(), '3.1.12' );
+
+    wp_enqueue_script( TEXT_DOMAIN . '-owl-carousel', get_stylesheet_directory_uri() . '/assets/plugins/OwlCarousel2-2.2.1/owl.carousel.js', array(), '2.2.1', true );
+    wp_enqueue_script( TEXT_DOMAIN . '-YTPlayer', get_stylesheet_directory_uri() . '/assets/plugins/jquery.mb.YTPlayer-3.1.12/jquery.mb.YTPlayer.js', array(), '3.1.12', true );
+    wp_enqueue_script( TEXT_DOMAIN . '-easing', get_stylesheet_directory_uri() . '/assets/plugins/easing/easing.js', array(), wp_get_theme()->get( 'Version' ), true );
+    wp_enqueue_script( TEXT_DOMAIN . '-masonry', get_stylesheet_directory_uri() . '/assets/plugins/masonry/masonry.js', array(), wp_get_theme()->get( 'Version' ), true );
+    wp_enqueue_script( TEXT_DOMAIN . '-images_loaded', get_stylesheet_directory_uri() . '/assets/plugins/masonry/images_loaded.js', array(), wp_get_theme()->get( 'Version' ), true );
 }
 // END Action wp_enqueue_scripts
 
