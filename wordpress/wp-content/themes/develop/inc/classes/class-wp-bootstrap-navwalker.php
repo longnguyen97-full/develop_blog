@@ -198,7 +198,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 			$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth );
 			$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 
-			$output .= $indent . '<li ' . $id . $class_names . '>';
+			$output .= $indent . '<li>';
 
 			// Initialize array for holding the $atts for the link item.
 			$atts           = array();
@@ -227,8 +227,6 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 				// For items in dropdowns use .dropdown-item instead of .nav-link.
 				if ( $depth > 0 ) {
 					$atts['class'] = 'dropdown-item';
-				} else {
-					$atts['class'] = 'nav-link';
 				}
 			}
 

@@ -389,6 +389,9 @@ function theme_add_scripts_styles() {
     wp_enqueue_script( TEXT_DOMAIN . '-jquery-core', 'https://code.jquery.com/jquery-3.6.0.js', array(), wp_get_theme()->get( 'Version' ), true );
     wp_enqueue_script( TEXT_DOMAIN . '-jquery-ui', 'https://code.jquery.com/ui/1.13.2/jquery-ui.js', array(), wp_get_theme()->get( 'Version' ), true );
 
+    // jQuery helper functions
+    wp_enqueue_script( TEXT_DOMAIN . '-active-menu', get_stylesheet_directory_uri() . '/assets/js/active-menu.js', array('jquery'), wp_get_theme()->get( 'Version' ), true );
+
     // Toogle tab
     wp_enqueue_script( TEXT_DOMAIN . '-toggle-tab', get_stylesheet_directory_uri() . '/assets/js/toggle-tab.js', array(), wp_get_theme()->get( 'Version' ), true );
 
