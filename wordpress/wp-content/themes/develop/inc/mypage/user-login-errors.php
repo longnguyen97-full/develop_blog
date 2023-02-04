@@ -4,8 +4,8 @@ function mp_detect_errors()
 	$params = array();
 	if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
 		$params = array(
-			'login_status' => $_GET['login'] ?: '',
-			'register_status' => $_POST['register_submit'] ?: '',
+			'login_status' => !empty($_GET['login']) ? $_GET['login'] : '',
+			'register_status' => !empty($_POST['register_submit']) ? $_POST['register_submit'] : '',
 		);
 	}
 

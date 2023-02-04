@@ -21,7 +21,7 @@ add_action('wp_login_failed', 'mp_user_login_failed');
 
 function mp_user_login_empty($user, $username, $password)
 {
-    if (($username == "" || $password == "") && !empty(mp_is_user_screen())) {
+    if (($username == "" || $password == "") && !empty(mp_is_user_screen($username))) {
         mp_redirect_user('empty');
         exit;
     }
@@ -48,7 +48,7 @@ function mp_redirect_user($status = '')
     exit;
 }
 
-function mp_is_user_screen()
+function mp_is_user_screen($username = '')
 {
     $referrer = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : $_SERVER['PHP_SELF'];
     $referrer = add_query_arg('result', 'failed', $referrer);

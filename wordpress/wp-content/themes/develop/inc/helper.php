@@ -415,7 +415,6 @@ function count_loaded_posts( $post = 0 )
 
 function get_loaded_posts()
 {
-    session_start();
     $loaded_post = isset($_SESSION['loaded_posts']) ? $_SESSION['loaded_posts'] : 0;
     unset($_SESSION['loaded_posts']);
 
