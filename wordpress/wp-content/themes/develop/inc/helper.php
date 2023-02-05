@@ -605,3 +605,10 @@ function extractValueFromObjectArray( $object_array = array(), $expected_value =
 {
     return array_column( $object_array, $expected_value );
 }
+
+function arr_dump($array)
+{
+    echo '<pre>';
+    var_dump($array);
+    echo '</pre>';
+}
