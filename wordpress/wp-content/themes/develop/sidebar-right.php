@@ -239,8 +239,9 @@
 
         <!-- Ranking List -->
         <?php
-        $weekly_posts  = get_posts_view( '1 week ago' );
-        $monthly_posts = get_posts_view( '1 month ago' );
+        $daily_posts   = get_posts_view( 'day' );
+        $weekly_posts  = get_posts_view( 'week' );
+        $monthly_posts = get_posts_view( 'month' );
         ?>
 
         <div class="sidebar_section future_events">
@@ -248,30 +249,71 @@
                 <div class="sidebar_title">Ranking List</div>
                 <div id="tabs">
                     <ul class="nav nav-pills nav-fill">
-                        <li class="nav-item">
-                            <a class="nav-link tabs-1 most-viewed-post active" data-tab="tabs-1" aria-current="page" href="#tabs-1">Weekly</a>
+                    <li class="nav-item">
+                            <a class="nav-link tabs-1 most-viewed-post active" data-tab="tabs-1" aria-current="page">Daily</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link tabs-2 most-viewed-post" data-tab="tabs-2" href="#tabs-2">Monthly</a>
+                            <a class="nav-link tabs-2 most-viewed-post" data-tab="tabs-2">Weekly</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link tabs-3 most-viewed-post" data-tab="tabs-3">Monthly</a>
                         </li>
                     </ul>
-                    <div id="tabs-1">
+                    <div id="tabs-1" class="tabs-item active">
                         <ol>
-                            <?php foreach ( $weekly_posts as $post ) : ?>
-                                <li><?php echo $post->post_title ?></li>
+                            <?php foreach ( $daily_posts as $post ) : ?>
+                                <li><a href="<?php echo get_permalink($post->ID); ?>"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></a></li>
                             <?php endforeach; ?>
                         </ol>
                     </div>
-                    <div id="tabs-2">
+                    <div id="tabs-2" class="tabs-item">
+                        <ol>
+                            <?php foreach ( $weekly_posts as $post ) : ?>
+                                <li><a href="<?php echo get_permalink($post->ID); ?>"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></a></li>
+                            <?php endforeach; ?>
+                        </ol>
+                    </div>
+                    <div id="tabs-3" class="tabs-item">
                         <ol>
                             <?php foreach ( $monthly_posts as $post ) : ?>
-                                <li><?php echo $post->post_title ?></li>
+                                <li><a href="<?php echo get_permalink($post->ID); ?>"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></a></li>
                             <?php endforeach; ?>
                         </ol>
                     </div>
                 </div>
             </div>
         </div>
+        <style>
+            #tabs a.nav-link {
+                cursor: pointer;
+            }
+            .tabs-item {
+                display: none;
+            }
+            .tabs-item ol {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+            .active {
+                display: inline-block;
+            }
+        </style>
+        <script>
+        jQuery( document ).ready(function($) {
+            $('#tabs a.nav-link').click(function(e) {
+                // toggle tab button
+                $('#tabs a.nav-link').removeClass('active');
+                $(this).addClass('active');
+                // hide all tabs-item
+                $('.tabs-item').removeClass('active');
+                // extract tab-item id from tab button
+                let tabItemId = $(this).attr('class').split(/\s+/)[1];
+                // show tab-item of current tab button
+                $(`#${tabItemId}`).addClass('active');
+            });
+        });
+        </script>
 
     </div>
 </div>

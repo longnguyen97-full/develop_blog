@@ -47,18 +47,19 @@ class CountPostView
 
     public function getPostsView()
     {
-        $results  = $this->wpdb->get_results($this->wpdb->prepare("SELECT post_ID FROM wp_count_post_view ORDER BY view DESC"));
+        $query = match ($this->get_by_date) {
+            'day' => "SELECT post_ID, RANK() OVER (ORDER BY date_view DESC, view DESC) AS 'rank' FROM wp_count_post_view",
+            'week' => "SELECT post_ID FROM wp_count_post_view WHERE date_view >= NOW() - INTERVAL 8 DAY AND date_view < NOW() + INTERVAL 1 DAY",
+            'month' => "SELECT post_ID, RANK() OVER (ORDER BY date_view DESC, view DESC) AS 'rank' FROM wp_count_post_view WHERE MONTH(date_view) = MONTH(CURRENT_DATE()) AND YEAR(date_view) = YEAR(CURRENT_DATE())",
+        };
+        $results  = $this->wpdb->get_results($this->wpdb->prepare($query));
         $post_ids = extractValueFromObjectArray( $results, 'post_ID' );
         $args = array(
             'post_type' => 'post',
+            'post_status' => 'publish',
             'post__in'  => $post_ids,
             'orderby'   => 'post__in',
         	'posts_per_page' => 10,
-		    'date_query' => array(
-		        array(
-		            'after' => $this->get_by_date,
-		        )
-		    )
         );
         return get_posts( $args ) ?? array();
     }
