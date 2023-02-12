@@ -1,0 +1,166 @@
+.contact_form_container,
+.profile_form_container
+{
+	width: 100%;
+	background: #FFFFFF;
+	border-radius: 6px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 50px;
+	padding-bottom: 40px;
+	margin-top: 44px;
+}
+.contact_input,
+.profile_input
+{
+	display: inline-block;
+	width: calc(50% - 15px);
+	height: 42px;
+	border: none;
+	outline: none;
+	border-bottom: solid 1px #cccccc;
+	background: transparent;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.contact_input:first-child,
+.profile_input:first-child
+{
+	margin-right: 25px;
+}
+.contact_input:hover, .contact_text:hover,
+.profile_input:hover, .profile_text:hover
+{
+	border-color: rgba(0,0,0,1);
+}
+.contact_text,
+.profile_text
+{
+	width: 100%;
+	height: 90px;
+	background: transparent;
+	border: none;
+	outline: none;
+	border-bottom: solid 1px #cccccc;
+	padding-top: 11px;
+	margin-top: 23px;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.contact_input::-webkit-input-placeholder, .contact_text::-webkit-input-placeholder,
+.profile_input::-webkit-input-placeholder, .profile_text::-webkit-input-placeholder
+{
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 14px !important;
+	font-weight: 500 !important;
+	color: rgba(0,0,0,0.3);
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.contact_input:-moz-placeholder, .contact_text:-moz-placeholder,
+.profile_input:-moz-placeholder, .profile_text:-moz-placeholder
+{
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 14px !important;
+	font-weight: 500 !important;
+	color: rgba(0,0,0,0.3);
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.contact_input::-moz-placeholder, .contact_text::-moz-placeholder,
+.profile_input::-moz-placeholder, .profile_text::-moz-placeholder
+{
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 14px !important;
+	font-weight: 500 !important;
+	color: rgba(0,0,0,0.3);
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.contact_input:-ms-input-placeholder, .contact_text:-ms-input-placeholder,
+.profile_input:-ms-input-placeholder, .profile_text:-ms-input-placeholder
+{
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 14px !important;
+	font-weight: 500 !important;
+	color: rgba(0,0,0,0.3);
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.contact_input::input-placeholder, .contact_text::input-placeholder,
+.profile_input::input-placeholder, .profile_text::input-placeholder
+{
+	color: rgba(0,0,0,1);
+}
+
+.contact_input:hover::-webkit-input-placeholder, .contact_text:hover::-webkit-input-placeholder,
+.profile_input:hover::-webkit-input-placeholder, .profile_text:hover::-webkit-input-placeholder
+{
+	color: rgba(0,0,0,1);
+}
+.contact_input:hover:-moz-placeholder, .contact_text:hover:-moz-placeholder,
+.profile_input:hover:-moz-placeholder, .profile_text:hover:-moz-placeholder
+{
+	color: rgba(0,0,0,1);
+}
+.contact_input:hover::-moz-placeholder, .contact_text:hover::-moz-placeholder,
+.profile_input:hover::-moz-placeholder, .profile_text:hover::-moz-placeholder
+{
+	color: rgba(0,0,0,1);
+}
+.contact_input:hover:-ms-input-placeholder, .contact_text:hover:-ms-input-placeholder,
+.profile_input:hover:-ms-input-placeholder, .profile_text:hover:-ms-input-placeholder
+{
+	color: rgba(0,0,0,1);
+}
+.contact_input:hover::input-placeholder, .contact_text:hover::input-placeholder,
+.profile_input:hover::input-placeholder, .profile_text:hover::input-placeholder
+{
+	color: rgba(0,0,0,1);
+}
+.contact_button,
+.profile_button
+{
+    display: block;
+    position: relative;
+    width: 143px;
+    height: 36px;
+    background: rgba(45,223,128,0.1);
+    color: rgba(45,223,128,1);
+    border: none;
+    outline: none;
+    border-radius: 18px;
+    cursor: pointer;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+    margin-top: 24px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.contact_button:hover,
+.profile_button:hover
+{
+    background: rgba(45,223,128,1);
+    color: #FFFFFF;
+}

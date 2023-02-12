@@ -44,9 +44,6 @@ get_header(); ?>
             endif;
             ?>
         </div>
-        <div class="col col-md-2">
-            <?php mp_get_template_user(); ?>
-        </div>
     </div>
 </main>
 <?php get_footer();

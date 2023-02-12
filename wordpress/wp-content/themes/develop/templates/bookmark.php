@@ -37,9 +37,6 @@ $the_query = get_data_from_table('post_id', 'bookmarks', array('user_id' => get_
             endif;
             ?>
         </div>
-        <div class="col col-md-2">
-            <?php mp_get_template_user(); ?>
-        </div>
     </div>
 </main>
 

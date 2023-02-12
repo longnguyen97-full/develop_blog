@@ -408,16 +408,9 @@ function theme_add_scripts_styles()
         wp_enqueue_style( TEXT_DOMAIN . '-category', getAssets() . '/css/category.css', array(), wp_get_theme()->get( 'Version' ) );
         wp_enqueue_style( TEXT_DOMAIN . '-category_responsive', getAssets() . '/css/category_responsive.css', array(), wp_get_theme()->get( 'Version' ) );
     }
-    // wp_enqueue_style( TEXT_DOMAIN . '-theme', getAssets() . '/css/style.css', array(), wp_get_theme()->get( 'Version' ) );
-    // wp_enqueue_style( TEXT_DOMAIN . '-theme-main', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
-    // wp_enqueue_style( TEXT_DOMAIN . '-category_responsive', getAssets() . '/css/category_responsive.css', array(), wp_get_theme()->get( 'Version' ) );
-    // wp_enqueue_style( TEXT_DOMAIN . '-category', getAssets() . '/css/category.css', array(), wp_get_theme()->get( 'Version' ) );
-    // wp_enqueue_style( TEXT_DOMAIN . '-contact_responsive', getAssets() . '/css/contact_responsive.css', array(), wp_get_theme()->get( 'Version' ) );
-    // wp_enqueue_style( TEXT_DOMAIN . '-contact', getAssets() . '/css/contact.css', array(), wp_get_theme()->get( 'Version' ) );
-    // // wp_enqueue_style( TEXT_DOMAIN . '-post_nosidebar_responsive', getAssets() . '/css/post_nosidebar_responsive.css', array(), wp_get_theme()->get( 'Version' ) );
-    // // wp_enqueue_style( TEXT_DOMAIN . '-post_nosidebar', getAssets() . '/css/post_nosidebar.css', array(), wp_get_theme()->get( 'Version' ) );
-    // // wp_enqueue_style( TEXT_DOMAIN . '-post_responsive', getAssets() . '/css/post_responsive.css', array(), wp_get_theme()->get( 'Version' ) );
-    // // wp_enqueue_style( TEXT_DOMAIN . '-post', getAssets() . '/css/post.css', array(), wp_get_theme()->get( 'Version' ) );
+    // Common pages
+    wp_enqueue_style( TEXT_DOMAIN . '-common', getAssets() . '/css/common.css', array(), wp_get_theme()->get( 'Version' ) );
+
     // // wp_enqueue_style( TEXT_DOMAIN . '-regular_responsive', getAssets() . '/css/regular_responsive.css', array(), wp_get_theme()->get( 'Version' ) );
     // // wp_enqueue_style( TEXT_DOMAIN . '-regular', getAssets() . '/css/regular.css', array(), wp_get_theme()->get( 'Version' ) );
 
