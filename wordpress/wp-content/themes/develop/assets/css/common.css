@@ -164,3 +164,8 @@
     background: rgba(45,223,128,1);
     color: #FFFFFF;
 }
+
+/* Feature classes */
+.hide {
+	display: none;
+}

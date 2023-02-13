@@ -37,6 +37,7 @@ function register_navwalker(){
     require_once get_template_directory() . '/inc/classes/class-wp-reaction-post.php';
     require_once get_template_directory() . '/inc/classes/class-wp-bookmark-post.php';
     require_once get_template_directory() . '/inc/classes/class-wp-count-post-view.php';
+    require_once get_template_directory() . '/inc/classes/class-wp-menu-item-custom-field.php';
 }
 add_action( 'after_setup_theme', 'register_navwalker' );
 
