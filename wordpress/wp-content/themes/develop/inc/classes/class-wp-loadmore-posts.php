@@ -35,6 +35,7 @@ class Loadmore
             'posts'        => json_encode($this->wp_query->query_vars),
             'current_page' => $this->queryVar('paged'),
             'max_page'     => $this->queryVar('max_num_pages', true),
+            'site_url'     => site_url(),
         ));
         wp_enqueue_script(TEXT_DOMAIN . '-loadmore');
     }
