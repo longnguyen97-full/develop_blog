@@ -20,4 +20,3 @@ define('THEME_ASSETS', THEME_URL . '/assets');
  */
 require get_parent_theme_file_path( '/inc/init.php' );
 require get_parent_theme_file_path( '/inc/mypage/user-init.php' );
-require get_parent_theme_file_path( '/inc/searchform/sf-init.php' );

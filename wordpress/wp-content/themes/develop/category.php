@@ -23,15 +23,19 @@
                         <div class="section_panel d-flex flex-row align-items-center justify-content-start">
                             <div class="section_title">Don't Miss</div>
                             <?php
-                            $categories = get_categories(['number' => 10]);
+                            $categories = get_categories(['number' => 10, 'post_status' => 'publish']);
                             $categories_default = array_slice($categories, 0, 3);
                             $categories_more = array_slice($categories, 3);
+                            global $wp;
+                            $category_name = $wp->query_vars['category_name'];
+                            $active = $category_name == 'all' ? 'active' : '';
                             ?>
                             <div class="section_tags ml-auto">
                                 <ul>
-                                    <li class="active"><a href="">all</a></li>
-                                    <?php foreach ($categories_default as $category) : ?>
-                                        <li><a href="<?php echo get_category_link($category); ?>"><?php echo $category->name; ?></a></li>
+                                    <li class="<?php echo $active; ?>"><a href="<?php echo site_url('category/all'); ?>">all</a></li>
+                                    <?php foreach ($categories_default as $category) :
+                                        $active = $category_name == $category->slug ? 'active' : ''; ?>
+                                        <li class="<?php echo $active; ?>"><a href="<?php echo get_category_link($category); ?>"><?php echo $category->name; ?></a></li>
                                     <?php endforeach; ?>
                                 </ul>
                             </div>
@@ -48,74 +52,74 @@
                             </div>
                         </div>
                         <div class="section_content">
-                            <div class="grid clearfix">
+                            <div class="grid clearfix loadmore-hook">
 
                                 <?php
+                                $category = get_category(get_query_var('cat'));
+                                $cat_id = $category->cat_ID;
                                 $args = [
-                                'numberposts' => 11
+                                    'numberposts' => 11,
+                                    'post_status' => 'publish',
+                                    'category'    => $cat_id
                                 ];
                                 $posts = get_posts($args);
+                                foreach ($posts as $key => $post) :
+                                    $post_link    = get_permalink($post->ID);
+                                    $post_title   = $post->post_title;
+                                    $post_author  = get_author_name($post->post_author);
+                                    $post_date    = date('M d, Y \a\t g:i A', strtotime($post->post_date));
+                                    $post_content = wp_trim_words($post->post_content, 11);
+                                    $author_link  = get_author_posts_url($post->post_author);
+
+                                    if (in_array($key, [0, 2, 3, 6])) :
                                 ?>
 
-                                <?php foreach ($posts as $key => $post) :
-                                    if (in_array($key, [0, 2, 3, 6])) :
-                                        ?>
-
-                                <!-- Small Card With Image -->
-                                <div class="card card_small_with_image grid-item">
-                                    <img class="card-img-top" src="<?php assets(); ?>/images/post_10.jpg" alt="">
-                                    <div class="card-body">
-                                        <div class="card-title card-title-small"><a href="post.html">How Did van Gogh’s
-                                                Turbulent Mind Depict One of the Most Complex Concepts in Physics?</a>
+                                        <!-- Small Card With Image -->
+                                        <div class="card card_small_with_image grid-item">
+                                            <img class="card-img-top" src="<?php assets(); ?>/images/post_10.jpg" alt="">
+                                            <div class="card-body">
+                                                <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_content; ?></a>
+                                                </div>
+                                                <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
+                                            </div>
                                         </div>
-                                        <small class="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48
-                                                am</span></small>
-                                    </div>
-                                </div>
 
 
-                                        <?php
+                                    <?php
                                     elseif (in_array($key, [1, 7, 8])) :
-                                        ?>
-                                <!-- Small Card Without Image -->
-                                <div class="card card_default card_small_no_image grid-item">
-                                    <div class="card-body">
-                                        <div class="card-title card-title-small"><a href="post.html">How Did van Gogh’s
-                                                Turbulent Mind Depict One of the Most Complex Concepts in Physics?</a>
+                                    ?>
+                                        <!-- Small Card Without Image -->
+                                        <div class="card card_default card_small_no_image grid-item">
+                                            <div class="card-body">
+                                                <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_content; ?></a>
+                                                </div>
+                                                <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
+                                            </div>
                                         </div>
-                                        <small class="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48
-                                                am</span></small>
-                                    </div>
-                                </div>
-                                        <?php
+                                    <?php
                                     elseif (in_array($key, [4, 5])) :
-                                        ?>
-                                <!-- Small Card With Background -->
-                                <div class="card card_default card_small_with_background grid-item">
-                                    <div class="card_background"
-                                        style="background-image:url(<?php assets(); ?>/images/post_11.jpg)"></div>
-                                    <div class="card-body">
-                                        <div class="card-title card-title-small"><a href="post.html">How Did van Gogh’s
-                                                Turbulent Mind Depict One of the Most Complex Concepts in Physics?</a>
+                                    ?>
+                                        <!-- Small Card With Background -->
+                                        <div class="card card_default card_small_with_background grid-item">
+                                            <div class="card_background" style="background-image:url(<?php assets(); ?>/images/post_11.jpg)"></div>
+                                            <div class="card-body">
+                                                <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_content; ?></a>
+                                                </div>
+                                                <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
+                                            </div>
                                         </div>
-                                        <small class="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48
-                                                am</span></small>
-                                    </div>
-                                </div>
 
-                                        <?php
+                                    <?php
                                     elseif (in_array($key, [9, 10])) :
-                                        ?>
-                                <!-- Default Card With Background -->
-                                <div class="card card_default card_default_with_background grid-item">
-                                    <div class="card_background"
-                                        style="background-image:url(<?php assets(); ?>/images/post_12.jpg)"></div>
-                                    <div class="card-body">
-                                        <div class="card-title card-title-small"><a href="post.html">How Did van Gogh’s
-                                                Turbulent Mind Depict One of the Most</a></div>
-                                    </div>
-                                </div>
-                                    <?php endif;
+                                    ?>
+                                        <!-- Default Card With Background -->
+                                        <div class="card card_default card_default_with_background grid-item">
+                                            <div class="card_background" style="background-image:url(<?php assets(); ?>/images/post_12.jpg)"></div>
+                                            <div class="card-body">
+                                                <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_content; ?></a></div>
+                                            </div>
+                                        </div>
+                                <?php endif;
                                 endforeach; ?>
 
                             </div>
@@ -123,9 +127,7 @@
                     </div>
 
                 </div>
-                <div class="load_more">
-                    <div id="load_more" class="load_more_button text-center trans_200">Load More</div>
-                </div>
+                <?php Loadmore::button(count($posts)); ?>
             </div>
 
             <!-- Sidebar -->

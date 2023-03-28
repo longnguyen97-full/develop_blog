@@ -17,25 +17,21 @@
             <div class="col-lg-9">
                 <div class="main_content">
 
-                    <!-- tag -->
+                    <!-- Category -->
 
                     <div class="category">
                         <div class="section_panel d-flex flex-row align-items-center justify-content-start">
                             <div class="section_title">Don't Miss</div>
                             <?php
-                            $tags = get_tags(['number' => 10, 'post_status' => 'publish']);
-                            $tags_default = array_slice($tags, 0, 3);
-                            $tags_more = array_slice($tags, 3);
-                            global $wp;
-                            $tag_name = $wp->query_vars['tag'];
-                            $active = $tag_name == 'all' ? 'active' : '';
+                            $categories = get_categories(['number' => 10, 'post_status' => 'publish']);
+                            $categories_default = array_slice($categories, 0, 3);
+                            $categories_more = array_slice($categories, 3);
                             ?>
                             <div class="section_tags ml-auto">
                                 <ul>
-                                    <li class="<?php echo $active; ?>"><a href="<?php echo site_url('tag/all'); ?>">all</a></li>
-                                    <?php foreach ($tags_default as $tag) :
-                                        $active = $tag_name == $tag->slug ? 'active' : ''; ?>
-                                        <li class="<?php echo $active; ?>"><a href="<?php echo get_tag_link($tag); ?>"><?php echo $tag->name; ?></a></li>
+                                    <li class="active"><a href="<?php echo site_url('category/all'); ?>">all</a></li>
+                                    <?php foreach ($categories_default as $category) : ?>
+                                        <li><a href="<?php echo get_category_link($category); ?>"><?php echo $category->name; ?></a></li>
                                     <?php endforeach; ?>
                                 </ul>
                             </div>
@@ -43,23 +39,21 @@
                                 <ul>
                                     <li>more
                                         <ul>
-                                            <?php foreach ($tags_more as $tag) : ?>
-                                                <li><a href="<?php echo get_tag_link($tag); ?>"><?php echo $tag->name; ?></a></li>
+                                            <?php foreach ($categories_more as $category) : ?>
+                                                <li><a href="<?php echo get_category_link($category); ?>"><?php echo $category->name; ?></a></li>
                                             <?php endforeach; ?>
                                         </ul>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="section_content">
-                            <div class="grid clearfix loadmore-hook">
+                        <div class="section_content loadmore_hook">
+                            <div class="grid clearfix">
 
                                 <?php
-                                $tag_id = get_queried_object()->term_id;
                                 $args = [
                                     'numberposts' => 11,
                                     'post_status' => 'publish',
-                                    'tag_id'      => $tag_id
                                 ];
                                 $posts = get_posts($args);
                                 foreach ($posts as $key => $post) :
@@ -67,7 +61,6 @@
                                     $post_title   = $post->post_title;
                                     $post_author  = get_author_name($post->post_author);
                                     $post_date    = date('M d, Y \a\t g:i A', strtotime($post->post_date));
-                                    $post_content = wp_trim_words($post->post_content, 11);
                                     $author_link  = get_author_posts_url($post->post_author);
 
                                     if (in_array($key, [0, 2, 3, 6])) :
@@ -77,7 +70,7 @@
                                         <div class="card card_small_with_image grid-item">
                                             <img class="card-img-top" src="<?php assets(); ?>/images/post_10.jpg" alt="">
                                             <div class="card-body">
-                                                <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_content; ?></a></div>
+                                                <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></div>
                                                 <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
                                             </div>
                                         </div>
@@ -88,7 +81,7 @@
                                         <!-- Small Card Without Image -->
                                         <div class="card card_default card_small_no_image grid-item">
                                             <div class="card-body">
-                                                <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_content; ?></a></div>
+                                                <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></div>
                                                 <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
                                             </div>
                                         </div>
@@ -99,7 +92,7 @@
                                         <div class="card card_default card_small_with_background grid-item">
                                             <div class="card_background" style="background-image:url(<?php assets(); ?>/images/post_11.jpg)"></div>
                                             <div class="card-body">
-                                                <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_content; ?></a></div>
+                                                <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></div>
                                                 <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
                                             </div>
                                         </div>
@@ -111,7 +104,7 @@
                                         <div class="card card_default card_default_with_background grid-item">
                                             <div class="card_background" style="background-image:url(<?php assets(); ?>/images/post_12.jpg)"></div>
                                             <div class="card-body">
-                                                <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_content; ?></a></div>
+                                                <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></div>
                                             </div>
                                         </div>
                                 <?php endif;

@@ -1,50 +1,55 @@
 <?php
-/**
- * The template for displaying search results pages
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
- *
- * @package WordPress
- * @subpackage Theme_Standard
- * @since 1.0
- * @version 1.0
- */
+add_filter('body_class', function ($classes) {
+    if ($classes[0] == 'search') {
+        unset($classes[0]);
+    }
+    return $classes;
+});
 
 get_header(); ?>
-<main class="app_container container">
-    <div class="row">
-        <div class="col col-md-8">
-            <?php
-            get_template_part( 'template-parts/global', 'breadcrumbs' );
 
-            if ( have_posts() ) :
-                echo '<h1 class="page-title">';
-                printf( __( 'Search Results for: %s', 'themestandard' ), '<span>' . get_search_query() . '</span>' );
-                echo '</h1>';
+<!-- Home -->
 
-                while ( have_posts() ) :
-                    the_post();
+<div class="home">
+    <div class="home_background parallax-window" data-parallax="scroll" data-image-src="<?php assets(); ?>/images/category.jpg" data-speed="0.8"></div>
+</div>
 
-                    get_template_part( 'template-parts/content', get_post_format() );
+<!-- Page Content -->
 
-                    count_loaded_posts();
+<div class="page_content">
+    <div class="container">
+        <div class="row row-lg-eq-height">
 
-                endwhile;
-                wp_reset_postdata();
+            <div class="main_content my-3">
+                <?php
+                if (have_posts()) :
+                    echo '<h1 class="page-title">';
+                    printf(__('Search Results for: %s', 'themestandard'), '<span>' . get_search_query() . '</span>');
+                    echo '</h1>';
 
-                the_loadmore();
+                    while (have_posts()) :
+                        the_post();
 
-            else :
-                echo '<h1>' . __( 'Nothing Found', 'themestandard' ) . '</h1>';
+                        get_template_part('template-parts/content', get_post_format());
 
-                get_template_part( 'template-parts/content', 'none' );
+                        // count_loaded_posts();
 
-            endif;
-            ?>
-        </div>
-        <div class="col col-md-4">
-            <?php get_sidebar(); ?>
+                    endwhile;
+                    wp_reset_postdata();
+
+                    // the_loadmore();
+
+                else :
+                    echo '<h1>' . __('Nothing Found', 'themestandard') . '</h1>';
+
+                    get_template_part('template-parts/content', 'none');
+
+                endif;
+                ?>
+            </div>
+
         </div>
     </div>
-</main>
-<?php get_footer();
+</div>
+
+<?php get_footer(); ?>

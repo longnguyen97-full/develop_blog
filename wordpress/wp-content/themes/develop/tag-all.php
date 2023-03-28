@@ -26,16 +26,12 @@
                             $tags = get_tags(['number' => 10, 'post_status' => 'publish']);
                             $tags_default = array_slice($tags, 0, 3);
                             $tags_more = array_slice($tags, 3);
-                            global $wp;
-                            $tag_name = $wp->query_vars['tag'];
-                            $active = $tag_name == 'all' ? 'active' : '';
                             ?>
                             <div class="section_tags ml-auto">
                                 <ul>
-                                    <li class="<?php echo $active; ?>"><a href="<?php echo site_url('tag/all'); ?>">all</a></li>
-                                    <?php foreach ($tags_default as $tag) :
-                                        $active = $tag_name == $tag->slug ? 'active' : ''; ?>
-                                        <li class="<?php echo $active; ?>"><a href="<?php echo get_tag_link($tag); ?>"><?php echo $tag->name; ?></a></li>
+                                    <li class="active"><a href="<?php echo site_url('tag/all'); ?>">all</a></li>
+                                    <?php foreach ($tags_default as $tag) : ?>
+                                        <li><a href="<?php echo get_tag_link($tag); ?>"><?php echo $tag->name; ?></a></li>
                                     <?php endforeach; ?>
                                 </ul>
                             </div>
@@ -55,11 +51,9 @@
                             <div class="grid clearfix loadmore-hook">
 
                                 <?php
-                                $tag_id = get_queried_object()->term_id;
                                 $args = [
                                     'numberposts' => 11,
-                                    'post_status' => 'publish',
-                                    'tag_id'      => $tag_id
+                                    'post_status' => 'publish'
                                 ];
                                 $posts = get_posts($args);
                                 foreach ($posts as $key => $post) :

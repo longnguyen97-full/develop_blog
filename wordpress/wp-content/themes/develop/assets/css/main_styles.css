@@ -909,7 +909,7 @@ section
 }
 .section_tags
 {
-	padding-right: 94px;
+	padding-right: 74px;
 }
 .section_tags ul li
 {
@@ -952,7 +952,6 @@ section
 	-o-transform: translateY(-50%);
 	transform: translateY(-50%);
 	right: 0;
-	width: 55px;
 }
 .section_panel_more ul li
 {

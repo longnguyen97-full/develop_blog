@@ -372,6 +372,9 @@ function theme_add_scripts_styles()
     // // wp_enqueue_script( TEXT_DOMAIN . '-post', getAssets() . '/js/post.js', array(), wp_get_theme()->get( 'Version' ), true );
     // // wp_enqueue_script( TEXT_DOMAIN . '-regular', getAssets() . '/js/regular.js', array(), wp_get_theme()->get( 'Version' ), true );
 
+    // Site
+    wp_enqueue_style( TEXT_DOMAIN . '-custom', getAssets() . '/css/custom.css', array(), wp_get_theme()->get( 'Version' ) );
+
     // TOP page
     if (is_home()) {
         // Theme script.
