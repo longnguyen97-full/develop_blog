@@ -14,7 +14,7 @@
 
             <!-- Main Content -->
 
-            <div class="col-lg-9">
+            <div class="col-lg-9 mb-5">
                 <div class="main_content">
 
                     <!-- tag -->
@@ -47,8 +47,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="section_content">
-                            <div class="grid clearfix loadmore-hook">
+                        <div class="section_content loadmore_hook">
+                            <div class="grid clearfix">
 
                                 <?php
                                 $args = [
@@ -59,10 +59,9 @@
                                 foreach ($posts as $key => $post) :
                                     $post_link    = get_permalink($post->ID);
                                     $post_title   = $post->post_title;
-                                    $post_author  = get_author_name($post->post_author);
                                     $post_date    = date('M d, Y \a\t g:i A', strtotime($post->post_date));
                                     $post_content = wp_trim_words($post->post_content, 11);
-                                    $author_link  = get_author_posts_url($post->post_author);
+                                    $post_author = get_the_author_posts_link_outside_loop($post);
 
                                     if (in_array($key, [0, 2, 3, 6])) :
                                 ?>
@@ -72,7 +71,7 @@
                                             <img class="card-img-top" src="<?php assets(); ?>/images/post_10.jpg" alt="">
                                             <div class="card-body">
                                                 <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_content; ?></a></div>
-                                                <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
+                                                <small class="post_meta"><?php echo $post_author; ?><span><?php echo $post_date; ?></span></small>
                                             </div>
                                         </div>
 
@@ -83,7 +82,7 @@
                                         <div class="card card_default card_small_no_image grid-item">
                                             <div class="card-body">
                                                 <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_content; ?></a></div>
-                                                <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
+                                                <small class="post_meta"><?php echo $post_author; ?><span><?php echo $post_date; ?></span></small>
                                             </div>
                                         </div>
                                     <?php
@@ -94,7 +93,7 @@
                                             <div class="card_background" style="background-image:url(<?php assets(); ?>/images/post_11.jpg)"></div>
                                             <div class="card-body">
                                                 <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_content; ?></a></div>
-                                                <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
+                                                <small class="post_meta"><?php echo $post_author; ?><span><?php echo $post_date; ?></span></small>
                                             </div>
                                         </div>
 
@@ -116,7 +115,13 @@
                     </div>
 
                 </div>
-                <?php Loadmore::button(count($posts)); ?>
+                <?php
+                $total_posts = count(get_posts([
+                    'numberposts' => -1,
+                    'post_status' => 'publish',
+                ]));
+                Loadmore::button($total_posts);
+                ?>
             </div>
 
             <!-- Sidebar -->

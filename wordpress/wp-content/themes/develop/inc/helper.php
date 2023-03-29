@@ -606,9 +606,17 @@ function extractValueFromObjectArray( $object_array = array(), $expected_value =
     return array_column( $object_array, $expected_value );
 }
 
-function arr_dump($array)
+function arr_dump($data = [], $exit = false)
 {
     echo '<pre>';
-    var_dump($array);
+    print_r($data);
     echo '</pre>';
+    $exit ? exit() : '';
+}
+
+function get_the_author_posts_link_outside_loop($post = [])
+{
+    $post_author = get_author_name($post->post_author);
+    $author_link = get_author_posts_url($post->post_author);
+    return "<a href='$author_link'>$post_author</a>";
 }
