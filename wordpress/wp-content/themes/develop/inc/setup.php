@@ -374,6 +374,7 @@ function theme_add_scripts_styles()
 
     // Site
     wp_enqueue_style( TEXT_DOMAIN . '-custom', getAssets() . '/css/custom.css', array(), wp_get_theme()->get( 'Version' ) );
+    wp_enqueue_style( TEXT_DOMAIN . '-fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0' );
 
     // TOP page
     if (is_home()) {

@@ -34,10 +34,11 @@ function register_navwalker(){
 	require_once get_template_directory() . '/inc/classes/class-wp-bootstrap-navwalker.php';
 	require_once get_template_directory() . '/inc/classes/class-wp-bootstrap-comment-walker.php';
     require_once get_template_directory() . '/inc/classes/class-wp-loadmore-posts.php';
-    require_once get_template_directory() . '/inc/classes/class-wp-reaction-post.php';
     require_once get_template_directory() . '/inc/classes/class-wp-bookmark-post.php';
     require_once get_template_directory() . '/inc/classes/class-wp-count-post-view.php';
     require_once get_template_directory() . '/inc/classes/class-wp-menu-item-custom-field.php';
+    require_once get_parent_theme_file_path( '/inc/classes/class-wp-comment.php' );
+    require_once get_parent_theme_file_path( '/inc/classes/class-wp-reaction.php' );
 }
 add_action( 'after_setup_theme', 'register_navwalker' );
 
