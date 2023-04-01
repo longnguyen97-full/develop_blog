@@ -10,6 +10,4 @@ if ( has_nav_menu( 'primary' ) ) {
         'fallback_cb'     => false,
         'walker'          => new WP_Bootstrap_Navwalker(),
     ) );
-
 }
-?>

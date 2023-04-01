@@ -375,13 +375,14 @@ function theme_add_scripts_styles()
     // Site
     wp_enqueue_style( TEXT_DOMAIN . '-custom', getAssets() . '/css/custom.css', array(), wp_get_theme()->get( 'Version' ) );
     wp_enqueue_style( TEXT_DOMAIN . '-fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0' );
+    wp_enqueue_script( TEXT_DOMAIN . '-custom', getAssets() . '/js/custom.js', array(), wp_get_theme()->get( 'Version' ), true );
 
     // TOP page
     if (is_home()) {
         // Theme script.
-        wp_enqueue_script( TEXT_DOMAIN . '-custom', getAssets() . '/js/custom.js', array(), wp_get_theme()->get( 'Version' ), true );
+        wp_enqueue_script( TEXT_DOMAIN . '-main_script', getAssets() . '/js/main_script.js', array(), wp_get_theme()->get( 'Version' ), true );
         // Theme stylesheet.
-        wp_enqueue_style( TEXT_DOMAIN . '-main_styles', getAssets() . '/css/main_styles.css', array(), wp_get_theme()->get( 'Version' ) );
+        wp_enqueue_style( TEXT_DOMAIN . '-main_style', getAssets() . '/css/main_style.css', array(), wp_get_theme()->get( 'Version' ) );
         wp_enqueue_style( TEXT_DOMAIN . '-responsive', getAssets() . '/css/responsive.css', array(), wp_get_theme()->get( 'Version' ) );
     // Category page
     } elseif (is_category() || is_tag()) {
