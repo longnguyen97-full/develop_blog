@@ -5,6 +5,7 @@
                 <div class="header_content d-flex flex-row align-items-center justify-content-start">
                     <div class="logo"><a href="/"><?php echo get_bloginfo('name') ?></a></div>
                     <?php get_template_part( 'template-parts/global', 'navigation' ); ?>
+                    <?php Authentication::form(); ?>
                     <div class="search_container ml-auto">
                         <div class="weather">
                             <div class="temperature">+10°</div>
