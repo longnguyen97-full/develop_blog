@@ -260,25 +260,19 @@
                         </li>
                     </ul>
                     <div id="tabs-1" class="tabs-item active">
-                        <ol>
-                            <?php foreach ( $daily_posts as $post ) : ?>
-                                <li><a href="<?php echo get_permalink($post->ID); ?>"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></a></li>
-                            <?php endforeach; ?>
-                        </ol>
+                        <?php foreach ( $daily_posts as $post ) : ?>
+                            <div><a href="<?php echo get_permalink($post->ID); ?>"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></a></div>
+                        <?php endforeach; ?>
                     </div>
                     <div id="tabs-2" class="tabs-item">
-                        <ol>
-                            <?php foreach ( $weekly_posts as $post ) : ?>
-                                <li><a href="<?php echo get_permalink($post->ID); ?>"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></a></li>
-                            <?php endforeach; ?>
-                        </ol>
+                        <?php foreach ( $weekly_posts as $post ) : ?>
+                            <div><a href="<?php echo get_permalink($post->ID); ?>"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></a></div>
+                        <?php endforeach; ?>
                     </div>
                     <div id="tabs-3" class="tabs-item">
-                        <ol>
-                            <?php foreach ( $monthly_posts as $post ) : ?>
-                                <li><a href="<?php echo get_permalink($post->ID); ?>"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></a></li>
-                            <?php endforeach; ?>
-                        </ol>
+                        <?php foreach ( $monthly_posts as $post ) : ?>
+                            <div><a href="<?php echo get_permalink($post->ID); ?>"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></a></div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
