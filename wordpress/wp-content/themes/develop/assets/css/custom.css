@@ -8,10 +8,10 @@ hr {
   border: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-/* Reaction Icon */
-.fa-thumbs-up {
+/* Toggle class */
+.cursor-pointer {
     cursor: pointer;
 }
-.fa-thumbs-up-active {
+.toggle-active {
     color: #218df2;
 }

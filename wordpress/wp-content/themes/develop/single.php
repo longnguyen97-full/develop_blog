@@ -33,6 +33,7 @@ $post_id = get_the_ID();
                         <div class="post_meta"><a href="#"><?php the_author_meta('user_nicename', $author_id); ?></a><span><?php echo get_the_date('F j, Y', $post_id) . ' at ' . get_the_date('g:i a', $post_id); ?></span></div>
                         <div class="post_share ml-sm-auto">
                             <span>share</span>
+                            <?php Bookmark::form($post_id); ?>
                             <ul class="post_share_list">
                                 <li class="post_share_item"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                 <li class="post_share_item"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -55,6 +56,7 @@ $post_id = get_the_ID();
                         <div class="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48 am</span></div>
                         <div class="post_share ml-sm-auto">
                             <span>share</span>
+                            <?php Bookmark::form($post_id); ?>
                             <ul class="post_share_list">
                                 <li class="post_share_item"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                 <li class="post_share_item"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>

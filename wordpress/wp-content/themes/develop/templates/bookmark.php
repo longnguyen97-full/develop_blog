@@ -1,43 +1,48 @@
 <?php
+
 /**
  * Template Name: Bookmark
  */
-mp_prevent_user_non_logged_in( 'login' );
+if (!is_user_logged_in()) {
+    return;
+}
 get_header();
 
-$the_query = get_data_from_table('post_id', 'bookmarks', array('user_id' => get_current_user_id()));
-?>
+$the_query = get_data_from_table('post_id', 'bookmarks', array('user_id' => get_current_user_id())); ?>
 
-<main class="app_container container-fluid">
-    <div class="row">
-        <div class="col col-md-2">
-            <?php get_sidebar(); ?>
-        </div>
-        <div class="col col-md-8">
+<!-- Home -->
+
+<div class="home">
+    <div class="home_background parallax-window" data-parallax="scroll" data-image-src="<?php assets(); ?>/images/category.jpg" data-speed="0.8"></div>
+</div>
+
+<!-- Page Content -->
+
+<div class="page_content">
+    <div class="container my-5 py-5">
+        <div class="row row-lg-eq-height">
+
             <?php
-            get_search_form();
+            if (!empty($the_query) && $the_query->have_posts()) :
 
-            if ( !empty( $the_query ) && $the_query->have_posts() ) :
+                while ($the_query->have_posts()) : $the_query->the_post();
 
-                while ( $the_query->have_posts() ) : $the_query->the_post();
-
-                    get_template_part( 'template-parts/content' );
+                    get_template_part('template-parts/content');
 
                     count_loaded_posts();
 
                 endwhile;
                 wp_reset_postdata();
 
-                the_loadmore();
-
             else :
 
-                get_template_part( 'template-parts/content', 'none' );
+                get_template_part('template-parts/content', 'none');
 
             endif;
             ?>
+
         </div>
     </div>
-</main>
+</div>
 
-<?php get_footer();?>
+<?php get_footer(); ?>

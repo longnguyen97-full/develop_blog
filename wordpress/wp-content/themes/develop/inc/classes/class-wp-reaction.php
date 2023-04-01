@@ -9,7 +9,7 @@ class Reaction
         add_action('wp_ajax_nopriv_reaction', [$this, 'callbackAjax']);
     }
 
-    public static function setup()
+    public function setup()
     {
         global $wpdb;
         $table_name = "{$wpdb->prefix}reactions";
@@ -50,17 +50,18 @@ class Reaction
         $where  = ['object_id' => $object_id, 'user_id' => $user_id, 'post_type' => $post_type, 'icon' => $icon];
         $format = ['%d', '%d', '%s', '%s'];
 
-        // Add reaction record
+        // Add/Delete reaction record
         !empty($active) ? $wpdb->delete($table, $where) : $wpdb->insert($table, $where, $format);
     }
 
     public static function icon($object_id = 0, $args = [])
     {
         if ($args['icon'] == 'like') :
-            $active = self::check(array_merge($args, ['object_id' => $object_id])) ? 'fa-thumbs-up-active' : '';
+            $active  = self::check(array_merge($args, ['object_id' => $object_id])) ? 'toggle-active' : '';
+            $checked = !empty($active) ? 'checked' : '';
             ?>
-            <p class="reaction <?php echo $active; ?>" data-object_id="<?php echo $object_id; ?>" data-user_id="<?php echo $args['user_id']; ?>" data-post_type="<?php echo $args['post_type']; ?>" data-icon="<?php echo $args['icon']; ?>"><i class="fa-regular fa-thumbs-up"></i></p>
-            <input type="checkbox" name="reaction-active" class="reaction-active hide" value="">
+            <p class="reaction cursor-pointer <?php echo $active; ?>" data-object_id="<?php echo $object_id; ?>" data-user_id="<?php echo $args['user_id']; ?>" data-post_type="<?php echo $args['post_type']; ?>" data-icon="<?php echo $args['icon']; ?>"><i class="fa-regular fa-thumbs-up"></i></p>
+            <input type="checkbox" name="reaction-active" class="reaction-active hide" value="<?php echo $checked; ?>" <?php echo $checked; ?>>
             <?php
         endif;
     }
@@ -68,9 +69,9 @@ class Reaction
     public static function check($args)
     {
         global $wpdb;
-        $table        = "{$wpdb->prefix}reactions";
-        $where        = "object_id = $args[object_id] && user_id = $args[user_id] && post_type = '$args[post_type]' && icon = '$args[icon]'";
-        $sql          = "SELECT * FROM $table WHERE $where";
+        $table = "{$wpdb->prefix}reactions";
+        $where = "object_id = $args[object_id] && user_id = $args[user_id] && post_type = '$args[post_type]' && icon = '$args[icon]'";
+        $sql   = "SELECT * FROM $table WHERE $where";
 
         $reaction = $wpdb->get_row($wpdb->prepare($sql));
         return !empty($reaction) ? true : false;
