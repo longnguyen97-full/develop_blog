@@ -16,6 +16,7 @@ class CountPostView
                 id bigint unsigned NOT NULL AUTO_INCREMENT,
                 post_id bigint NOT NULL,
                 views bigint NOT NULL,
+                date_views datetime DEFAULT '0000-00-00 00:00:00',
                 PRIMARY KEY (id)
             )
             COLLATE $collate";
@@ -35,7 +36,7 @@ class CountPostView
     {
         // setup date
         $views = self::getViews($post_id) ?: 0;
-        $data  = ['views' => $views + 1];
+        $data  = ['views' => $views + 1, 'date_views' => current_time('mysql')];
         $where = ['post_id' => $post_id];
         global $wpdb;
         $table = "{$wpdb->prefix}count_post_views";
@@ -52,6 +53,30 @@ class CountPostView
         ?>
         <span class="text-light-blue mr-1"><i class="fas fa-eye"></i><sub><?php echo self::getViews($post_id) ?: 0; ?></sub></span>
         <?php
+    }
+
+    public static function getViewsByDate($date)
+    {
+        global $wpdb;
+        $table   = "{$wpdb->prefix}count_post_views";
+        $select  = 'post_id';
+        $oderby1 = 'date_views';
+        $oderby2 = 'views';
+        $query   = match ($date) {
+            'day'   => "SELECT $select, RANK() OVER (ORDER BY $oderby1 DESC, $oderby2 DESC) AS 'rank' FROM $table",
+            'week'  => "SELECT $select FROM $table WHERE $oderby1 >= NOW() - INTERVAL 8 DAY AND $oderby1 < NOW() + INTERVAL 1 DAY ORDER BY $oderby1 DESC",
+            'month' => "SELECT $select, RANK() OVER (ORDER BY $oderby1 DESC, $oderby2 DESC) AS 'rank' FROM $table WHERE MONTH($oderby1) = MONTH(CURRENT_DATE()) AND YEAR($oderby1) = YEAR(CURRENT_DATE())",
+        };
+        $results  = $wpdb->get_results($wpdb->prepare($query));
+        $post_ids = array_column( $results, $select );
+        $args = [
+            'post_type'      => 'post',
+            'post_status'    => 'publish',
+            'post__in'       => $post_ids,
+            'orderby'        => 'post__in',
+            'posts_per_page' => 10,
+        ];
+        return get_posts($args) ?: [];
     }
 }
 $countPostView = new CountPostView();

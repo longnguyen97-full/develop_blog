@@ -239,9 +239,9 @@
 
         <!-- Ranking List -->
         <?php
-        $daily_posts   = get_posts_view( 'day' );
-        $weekly_posts  = get_posts_view( 'week' );
-        $monthly_posts = get_posts_view( 'month' );
+        $daily_posts   = CountPostView::getViewsByDate('day');
+        $weekly_posts  = CountPostView::getViewsByDate('week');
+        $monthly_posts = CountPostView::getViewsByDate('month');
         ?>
 
         <div class="sidebar_section future_events">

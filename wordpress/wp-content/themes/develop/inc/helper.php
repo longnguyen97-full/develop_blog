@@ -576,36 +576,12 @@ function get_bookmark_template()
 }
 
 /**
- * Count total view of post
+ * Debug function
+ *
+ * @param array $data
+ * @param boolean $exit
+ * @return void
  */
-function count_post_view()
-{
-    // $CountPostView = new CountPostView();
-    // $CountPostView->count();
-}
-
-/**
- * Get post_ids from wp_count_post_view table
- * Get post objects from post_ids
- */
-function get_posts_view( $get_by_date = '' )
-{
-    // $CountPostView = new CountPostView();
-    // $CountPostView->setData( $get_by_date );
-    // return $CountPostView->getPostsView();
-}
-
-/**
- * Get values of certain field from array objects and return new array
- * @param  array  $object_array   an array contain objects
- * @param  string $expected_value a expected field
- * @return array                  return an array contain values of certain field
- */
-function extractValueFromObjectArray( $object_array = array(), $expected_value = '' )
-{
-    return array_column( $object_array, $expected_value );
-}
-
 function arr_dump($data = [], $exit = false)
 {
     echo '<pre>';
@@ -614,6 +590,12 @@ function arr_dump($data = [], $exit = false)
     $exit ? exit() : '';
 }
 
+/**
+ * Print author is wappred an anchor tag outside of loop
+ *
+ * @param array $post
+ * @return void
+ */
 function get_the_author_posts_link_outside_loop($post = [])
 {
     $post_author = get_author_name($post->post_author);
