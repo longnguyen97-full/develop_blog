@@ -26,7 +26,7 @@ class theme_widget_list_category extends WP_Widget
         ) );
 
         foreach( $categories as $category ) {
-            echo '<ul><li><a href="' . get_category_link( $category->term_id ) . '">' . esc_html( $category->name ) . ' (' . $category->category_count . ')' . '</a></li></ul>';
+            echo '<ul class="footer-list"><li><a href="' . get_category_link( $category->term_id ) . '">' . esc_html( $category->name ) . ' (' . $category->category_count . ')' . '</a></li></ul>';
         }
 
         echo $args['after_widget'];

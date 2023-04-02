@@ -5,6 +5,7 @@
         <div class="row row-lg-eq-height">
             <div class="footer_content">
                 <div class="footer_logo"><a href="/"><?php echo get_bloginfo('name') ?></a></div>
+                <?php get_sidebar('footer'); ?>
                 <div class="footer_social">
                     <ul>
                         <li class="footer_social_facebook"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
