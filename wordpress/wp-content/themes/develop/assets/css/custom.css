@@ -12,6 +12,6 @@ hr {
 .cursor-pointer {
     cursor: pointer;
 }
-.toggle-active {
-    color: #218df2;
+.toggle-active, .text-light-blue {
+    color: #218df2 !important;
 }

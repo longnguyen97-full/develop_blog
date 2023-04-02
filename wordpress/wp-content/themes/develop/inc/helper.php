@@ -580,8 +580,8 @@ function get_bookmark_template()
  */
 function count_post_view()
 {
-    $CountPostView = new CountPostView();
-    $CountPostView->count();
+    // $CountPostView = new CountPostView();
+    // $CountPostView->count();
 }
 
 /**
@@ -590,9 +590,9 @@ function count_post_view()
  */
 function get_posts_view( $get_by_date = '' )
 {
-    $CountPostView = new CountPostView();
-    $CountPostView->setData( $get_by_date );
-    return $CountPostView->getPostsView();
+    // $CountPostView = new CountPostView();
+    // $CountPostView->setData( $get_by_date );
+    // return $CountPostView->getPostsView();
 }
 
 /**

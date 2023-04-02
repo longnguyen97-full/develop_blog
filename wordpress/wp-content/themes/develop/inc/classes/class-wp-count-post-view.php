@@ -1,67 +1,57 @@
 <?php
 class CountPostView
 {
-    public $page_name   = 'Count Post View';
-    public $page_slug   = 'cybridge-count-postview';
-    public $parent_slug = 'cybridge-helper';
-
-    /**
-     * Start up
-     */
     public function __construct()
     {
-        global $wp_query, $wpdb;
-        $this->wp_query = $wp_query;
-        $this->wpdb     = $wpdb;
-    	$this->post_id  = get_the_ID() ?? 0;
-    	$this->table    = "{$wpdb->prefix}count_post_view";
+        add_action('admin_init', [$this, 'setup']);
     }
 
-    public function setData( $get_by_date = '' )
+    public function setup()
     {
-    	$this->get_by_date = $get_by_date;
+        global $wpdb;
+        $table   = "{$wpdb->prefix}count_post_views";
+        $collate = $wpdb->collate;
+        $sql =
+            "CREATE TABLE IF NOT EXISTS $table (
+                id bigint unsigned NOT NULL AUTO_INCREMENT,
+                post_id bigint NOT NULL,
+                views bigint NOT NULL,
+                PRIMARY KEY (id)
+            )
+            COLLATE $collate";
+
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        dbDelta($sql);
     }
 
-    public function count()
+    public static function getViews($post_id)
     {
-    	$view  = $this->getPostView( $this->post_id ) ?? 0;
-    	$data  = array( 'view' => $view + 1 );
-    	$where = array( 'post_ID' => $this->post_id );
-    	$this->updateOrInsert( $this->table, $data, $where );
+        global $wpdb;
+        $table = "{$wpdb->prefix}count_post_views";
+        return $wpdb->get_row($wpdb->prepare("SELECT views FROM $table WHERE post_id = %d", $post_id))->views;
     }
 
-    public function getPostView( $post_id = 0 )
+    public static function countViews($post_id)
     {
-        return $this->wpdb->get_row($this->wpdb->prepare("SELECT view FROM wp_count_post_view WHERE post_ID = %d", $post_id))->view;
+        // setup date
+        $views = self::getViews($post_id) ?: 0;
+        $data  = ['views' => $views + 1];
+        $where = ['post_id' => $post_id];
+        global $wpdb;
+        $table = "{$wpdb->prefix}count_post_views";
+        // update or insert count_post_view record
+        $update_id = $wpdb->update($table, $data, $where);
+        if (false === $update_id || $update_id < 1) {
+            $data = array_merge($data, $where);
+            $wpdb->insert($table, $data);
+        }
     }
 
-    public function updateOrInsert( $table = '', $data = array(), $where = array() )
+    public static function form($post_id)
     {
-		$updated = $this->wpdb->update( $table, $data, $where );
-		// If nothing found to update, it will try and create the record.
-		if ( false === $updated || $updated < 1 ) {
-			$data = array_merge( $data, $where );
-			$this->wpdb->insert( $table, $data );
-		}
-    }
-
-    public function getPostsView()
-    {
-        $query = match ($this->get_by_date) {
-            'day' => "SELECT post_ID, RANK() OVER (ORDER BY date_view DESC, view DESC) AS 'rank' FROM wp_count_post_view",
-            'week' => "SELECT post_ID FROM wp_count_post_view WHERE date_view >= NOW() - INTERVAL 8 DAY AND date_view < NOW() + INTERVAL 1 DAY",
-            'month' => "SELECT post_ID, RANK() OVER (ORDER BY date_view DESC, view DESC) AS 'rank' FROM wp_count_post_view WHERE MONTH(date_view) = MONTH(CURRENT_DATE()) AND YEAR(date_view) = YEAR(CURRENT_DATE())",
-        };
-        $results  = $this->wpdb->get_results($this->wpdb->prepare($query));
-        $post_ids = extractValueFromObjectArray( $results, 'post_ID' );
-        $args = array(
-            'post_type' => 'post',
-            'post_status' => 'publish',
-            'post__in'  => $post_ids,
-            'orderby'   => 'post__in',
-        	'posts_per_page' => 10,
-        );
-        return get_posts( $args ) ?? array();
+        ?>
+        <span class="text-light-blue" style="margin-right: -20px;"><i class="fas fa-eye"></i><sub><?php echo self::getViews($post_id) ?: 0; ?></sub></span>
+        <?php
     }
 }
-$CountPostView = new CountPostView();
+$countPostView = new CountPostView();
