@@ -50,7 +50,7 @@ class CountPostView
     public static function form($post_id)
     {
         ?>
-        <span class="text-light-blue" style="margin-right: -20px;"><i class="fas fa-eye"></i><sub><?php echo self::getViews($post_id) ?: 0; ?></sub></span>
+        <span class="text-light-blue mr-1"><i class="fas fa-eye"></i><sub><?php echo self::getViews($post_id) ?: 0; ?></sub></span>
         <?php
     }
 }

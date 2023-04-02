@@ -32,13 +32,13 @@ CountPostView::countViews($post_id); ?>
                         <?php $author_id = get_post_field('post_author', $post_id); ?>
                         <div class="post_meta"><a href="#"><?php the_author_meta('user_nicename', $author_id); ?></a><span><?php echo get_the_date('F j, Y', $post_id) . ' at ' . get_the_date('g:i a', $post_id); ?></span></div>
                         <div class="post_share ml-sm-auto">
-                            <span class="mr-2">share</span>
                             <?php Bookmark::form($post_id); ?>
                             <?php CountPostView::form($post_id); ?>
+                            <span style="margin-right: -20px">share</span>
                             <ul class="post_share_list">
-                                <li class="post_share_item"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li class="post_share_item"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li class="post_share_item"><a href="#"><i class="fa fa-google" aria-hidden="true"></i></a></li>
+                                <li class="post_share_item"><a href="<?php the_social_url('facebook', get_permalink()); ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li class="post_share_item"><a href="<?php the_social_url('twitter', get_permalink()); ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li class="post_share_item"><a href="<?php the_social_url('google_plus', get_permalink()); ?>"><i class="fa fa-google" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -56,13 +56,13 @@ CountPostView::countViews($post_id); ?>
                         </div>
                         <div class="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48 am</span></div>
                         <div class="post_share ml-sm-auto">
-                            <span class="mr-2">share</span>
                             <?php Bookmark::form($post_id); ?>
                             <?php CountPostView::form($post_id); ?>
+                            <span style="margin-right: -20px">share</span>
                             <ul class="post_share_list">
-                                <li class="post_share_item"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li class="post_share_item"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li class="post_share_item"><a href="#"><i class="fa fa-google" aria-hidden="true"></i></a></li>
+                                <li class="post_share_item"><a href="<?php the_social_url('facebook', get_permalink()); ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li class="post_share_item"><a href="<?php the_social_url('twitter', get_permalink()); ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li class="post_share_item"><a href="<?php the_social_url('google_plus', get_permalink()); ?>"><i class="fa fa-google" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </div>

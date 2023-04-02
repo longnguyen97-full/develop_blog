@@ -57,7 +57,7 @@ class Bookmark
         $active  = self::check(['post_id' => $post_id, 'user_id' => $user_id]) ? 'toggle-active' : '';
         $checked = !empty($active) ? 'checked' : '';
         ?>
-        <span class="mr-2">
+        <span class="mr-1">
             <i class="far fa-bookmark bookmark cursor-pointer <?php echo $active; ?>" data-post_id="<?php echo $post_id; ?>" data-user_id="<?php echo $user_id; ?>"></i>
             <input type="checkbox" name="bookmark-active" class="bookmark-active hide" value="<?php echo $checked; ?>" <?php echo $checked; ?>>
         </span>

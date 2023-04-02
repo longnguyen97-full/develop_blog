@@ -620,3 +620,26 @@ function get_the_author_posts_link_outside_loop($post = [])
     $author_link = get_author_posts_url($post->post_author);
     return "<a href='$author_link'>$post_author</a>";
 }
+
+/**
+ * Get social url for sharing post to social networks
+ *
+ * @param string $service
+ * @param string $url
+ * @param string $title
+ * @return void
+ */
+function the_social_url($service, $url, $title = '')
+{
+    if ( $service == 'facebook' ) {
+        echo "https://www.facebook.com/sharer/sharer.php?u=$url";
+    } else if ( $service == 'twitter' ) {
+        echo $title
+            ? 'https://twitter.com/home?status='. rawurlencode($title) ."%3A%20$url"
+            : "https://twitter.com/home?status=$url";
+    } else if ( $service == 'google_plus' ) {
+        echo "https://plus.google.com/share?url=$url";
+    } else {
+        echo '#';
+    }
+}
