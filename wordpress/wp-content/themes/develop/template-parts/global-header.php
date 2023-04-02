@@ -7,10 +7,10 @@
                     <?php get_template_part( 'template-parts/global', 'navigation' ); ?>
                     <?php Authentication::form(); ?>
                     <div class="search_container ml-auto">
-                        <div class="weather">
+                        <!-- <div class="weather">
                             <div class="temperature">+10°</div>
                             <img class="weather_icon" src="<?php assets(); ?>/images/cloud.png" alt="">
-                        </div>
+                        </div> -->
                         <form role="search" method="get" class="search-form" action="<?php echo site_url('/'); ?>">
                             <input type="search" class="header_search_input" required="required" placeholder="Type to Search..." value="<?php get_search_query();?>" name="s">
                             <img class="header_search_icon" src="<?php assets(); ?>/images/search.png" alt="">

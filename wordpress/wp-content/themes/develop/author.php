@@ -9,14 +9,14 @@
 <!-- Page Content -->
 
 <div class="page_content">
-    <div class="container">
+    <div class="container my-5 py-5">
 
         <div class="author-profile">
-            <div class="row">
-                <div class="col-3">
-                    <img src="<?php echo get_image('user-avatar.jpg') ?>" alt="author-avatar" class="author-avatar" width="250" height="250">
+            <div class="row bg-light bg-gradient rounded py-2">
+                <div class="col-2">
+                    <?php echo get_avatar( get_the_author_meta( 'ID' ), '', '', '', ['class' => ['rounded-circle', 'author-avatar']] ); ?>
                 </div>
-                <div class="col-9">
+                <div class="col-10">
                     <p>
                     <h2><?php the_author_meta('display_name'); ?> (<?php the_author_nickname(); ?>)</h2>
                     </p>

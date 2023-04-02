@@ -63,12 +63,13 @@
                                     $post_date    = date('M d, Y \a\t g:i A', strtotime($post->post_date));
                                     $post_content = wp_trim_words($post->post_content, 11);
                                     $author_link  = get_author_posts_url($post->post_author);
-
+                                    
                                     if ($key == 0) :
+                                        $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/post_1.jpg';
                                 ?>
                                         <!-- Largest Card With Image -->
                                         <div class="card card_largest_with_image grid-item">
-                                            <img class="card-img-top" src="<?php assets(); ?>/images/post_1.jpg" alt="https://unsplash.com/@cjtagupa">
+                                            <img class="card-img-top" src="<?php echo $post_thumbnail; ?>" alt="https://unsplash.com/@cjtagupa">
                                             <div class="card-body">
                                                 <div class="card-title"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></div>
                                                 <p class="card-text"><?php echo $post_content; ?></p>
@@ -90,10 +91,11 @@
 
                                     <?php
                                     elseif ($key == 2) :
+                                        $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/post_4.jpg';
                                     ?>
                                         <!-- Small Card With Background -->
                                         <div class="card card_default card_small_with_background grid-item">
-                                            <div class="card_background" style="background-image:url(<?php assets(); ?>/images/post_4.jpg)"></div>
+                                            <div class="card_background" style="background-image:url(<?php echo $post_thumbnail; ?>)"></div>
                                             <div class="card-body">
                                                 <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></div>
                                                 <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
@@ -102,11 +104,12 @@
 
                                     <?php
                                     elseif (in_array($key, [3, 4])) :
+                                        $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/post_2.jpg';
                                     ?>
 
                                         <!-- Small Card With Image -->
                                         <div class="card card_small_with_image grid-item">
-                                            <img class="card-img-top" src="<?php assets(); ?>/images/post_2.jpg" alt="https://unsplash.com/@jakobowens1">
+                                            <img class="card-img-top" src="<?php echo $post_thumbnail; ?>" alt="https://unsplash.com/@jakobowens1">
                                             <div class="card-body">
                                                 <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></div>
                                                 <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
@@ -173,10 +176,11 @@
                                     $author_link = get_author_posts_url($post->post_author);
 
                                     if ($key == 0) :
+                                        $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/post_8.jpg';
                                 ?>
                                         <!-- Large Card With Background -->
                                         <div class="card card_large_with_background grid-item">
-                                            <div class="card_background" style="background-image:url(<?php assets(); ?>/images/post_8.jpg)"></div>
+                                            <div class="card_background" style="background-image:url(<?php echo $post_thumbnail; ?>)"></div>
                                             <div class="card-body">
                                                 <div class="card-title"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></div>
                                                 <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
@@ -185,10 +189,11 @@
 
                                     <?php
                                     elseif ($key == 1) :
+                                        $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/post_9.jpg';
                                     ?>
                                         <!-- Large Card With Image -->
                                         <div class="card grid-item card_large_with_image">
-                                            <img class="card-img-top" src="<?php assets(); ?>/images/post_9.jpg" alt="">
+                                            <img class="card-img-top" src="<?php echo $post_thumbnail; ?>" alt="">
                                             <div class="card-body">
                                                 <div class="card-title"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></div>
                                                 <p class="card-text"><?php echo $post_content; ?></p>
@@ -198,11 +203,12 @@
 
                                     <?php
                                     elseif ($key == 2) :
+                                        $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/post_5.jpg';
                                     ?>
 
                                         <!-- Default Card With Image -->
                                         <div class="card card_small_with_image grid-item">
-                                            <img class="card-img-top" src="<?php assets(); ?>/images/post_5.jpg" alt="">
+                                            <img class="card-img-top" src="<?php echo $post_thumbnail; ?>" alt="">
                                             <div class="card-body">
                                                 <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></div>
                                                 <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
@@ -221,12 +227,13 @@
 
                                     <?php
                                     elseif (in_array($key, [3, 7])) :
+                                        $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/post_7.jpg';
                                     ?>
 
                                         <!-- Default Card With Background -->
 
                                         <div class="card card_default card_default_with_background grid-item">
-                                            <div class="card_background" style="background-image:url(<?php assets(); ?>/images/post_7.jpg)"></div>
+                                            <div class="card_background" style="background-image:url(<?php echo $post_thumbnail; ?>)"></div>
                                             <div class="card-body">
                                                 <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></div>
                                             </div>
@@ -261,11 +268,12 @@
                                     $author_link = get_author_posts_url($post->post_author);
 
                                     if (in_array($key, [0, 2, 3, 6])) :
+                                        $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/post_10.jpg';
                                 ?>
 
                                         <!-- Small Card With Image -->
                                         <div class="card card_small_with_image grid-item">
-                                            <img class="card-img-top" src="<?php assets(); ?>/images/post_10.jpg" alt="">
+                                            <img class="card-img-top" src="<?php echo $post_thumbnail; ?>" alt="">
                                             <div class="card-body">
                                                 <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></div>
                                                 <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
@@ -284,10 +292,11 @@
                                         </div>
                                     <?php
                                     elseif (in_array($key, [4, 5])) :
+                                        $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/post_11.jpg';
                                     ?>
                                         <!-- Small Card With Background -->
                                         <div class="card card_default card_small_with_background grid-item">
-                                            <div class="card_background" style="background-image:url(<?php assets(); ?>/images/post_11.jpg)"></div>
+                                            <div class="card_background" style="background-image:url(<?php echo $post_thumbnail; ?>)"></div>
                                             <div class="card-body">
                                                 <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></div>
                                                 <small class="post_meta"><a href="<?php echo $author_link; ?>"><?php echo $post_author; ?></a><span><?php echo $post_date; ?></span></small>
@@ -296,10 +305,11 @@
 
                                     <?php
                                     elseif (in_array($key, [9, 10])) :
+                                        $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/post_12.jpg';
                                     ?>
                                         <!-- Default Card With Background -->
                                         <div class="card card_default card_default_with_background grid-item">
-                                            <div class="card_background" style="background-image:url(<?php assets(); ?>/images/post_12.jpg)"></div>
+                                            <div class="card_background" style="background-image:url(<?php echo $post_thumbnail; ?>)"></div>
                                             <div class="card-body">
                                                 <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></div>
                                             </div>

@@ -559,9 +559,9 @@ function get_the_author_comments()
 function get_the_author_liked_posts()
 {
     global $wpdb;
-
-    $author  = get_the_author_id();
-    $query   = "SELECT COUNT(user_id) FROM wp_reactions WHERE post_type = 'post' AND user_id = {$author}";
+    $table  = "{$wpdb->prefix}reactions";
+    $author = get_the_author_id();
+    $query  = "SELECT COUNT(user_id) FROM $table WHERE post_type = 'post' AND user_id = {$author}";
 
     return $wpdb->get_var($query);
 }

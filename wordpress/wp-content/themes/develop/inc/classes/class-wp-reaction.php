@@ -59,8 +59,9 @@ class Reaction
         if ($args['icon'] == 'like') :
             $active  = self::check(array_merge($args, ['object_id' => $object_id])) ? 'toggle-active' : '';
             $checked = !empty($active) ? 'checked' : '';
+            $class   = !empty($args['class']) ? implode(' ', $args['class']) : '';
             ?>
-            <p class="reaction cursor-pointer <?php echo $active; ?>" data-object_id="<?php echo $object_id; ?>" data-user_id="<?php echo $args['user_id']; ?>" data-post_type="<?php echo $args['post_type']; ?>" data-icon="<?php echo $args['icon']; ?>"><i class="fa-regular fa-thumbs-up"></i></p>
+            <p class="reaction cursor-pointer <?php echo $active; ?> <?php echo $class; ?>" data-object_id="<?php echo $object_id; ?>" data-user_id="<?php echo $args['user_id']; ?>" data-post_type="<?php echo $args['post_type']; ?>" data-icon="<?php echo $args['icon']; ?>"><i class="fa-regular fa-thumbs-up"></i></p>
             <input type="checkbox" name="reaction-active" class="reaction-active hide" value="<?php echo $checked; ?>" <?php echo $checked; ?>>
             <?php
         endif;

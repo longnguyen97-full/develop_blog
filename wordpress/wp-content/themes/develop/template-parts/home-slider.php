@@ -5,17 +5,17 @@
 
         <?php
         $args = [
-            'numberposts' => 3
+            'numberposts' => 3,
+            'post_status' => 'publish'
         ];
         $posts = get_posts($args);
-
-        $post_url = get_permalink( $post->ID );
-        $category = get_the_category($post->ID)[0];
-        ?>
-
-        <?php foreach ($posts as $post) : ?>
+        if (!empty($posts)) :
+        foreach ($posts as $key => $post) :
+            $post_link      = get_permalink($post->ID);
+            $category       = get_the_category($post->ID)[0];
+            $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/home_slider.jpg'; ?>
             <div class="owl-item">
-                <div class="home_slider_background" style="background-image:url(<?php assets(); ?>/images/home_slider.jpg)"></div>
+                <div class="home_slider_background" style="background-image:url(<?php echo $post_thumbnail; ?>)"></div>
                 <div class="home_slider_content_container">
                     <div class="container">
                         <div class="row">
@@ -24,10 +24,10 @@
                                     <div class="home_slider_item_category trans_200"><a href="<?php echo get_category_link($category->term_id); ?>"
                                             class="trans_200"><?php echo $category->name; ?></a></div>
                                     <div class="home_slider_item_title">
-                                        <a href="<?php echo $post_url; ?>"><?php echo $post->post_title; ?></a>
+                                        <a href="<?php echo $post_link; ?>"><?php echo $post->post_title; ?></a>
                                     </div>
                                     <div class="home_slider_item_link">
-                                        <a href="<?php echo $post_url; ?>" class="trans_200">Continue Reading
+                                        <a href="<?php echo $post_link; ?>" class="trans_200">Continue Reading
                                             <svg version="1.1" id="link_arrow_1"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -66,20 +66,24 @@
                         </div>
                     </div>
 
+                    <?php
+                    $nextpost = $key == 2 ? $posts[0] : $posts[++$key];
+                    $nextpost_thumbnail = get_the_post_thumbnail_url($nextpost->ID) ?: assets(true).'/images/home_slider_next.jpg';
+                    $nextpost_content   = wp_trim_words($nextpost->post_content, 11);
+                    ?>
                     <div class="home_slider_next_container">
-                        <div class="home_slider_next" style="background-image:url(<?php assets(); ?>/images/home_slider_next.jpg)">
+                        <div class="home_slider_next" style="background-image:url(<?php echo $nextpost_thumbnail; ?>)">
                             <div class="home_slider_next_background trans_400"></div>
                             <div class="home_slider_next_content trans_400">
                                 <div class="home_slider_next_title">next</div>
-                                <div class="home_slider_next_link">How Did van Gogh’s Turbulent Mind Depict One
-                                    of the Most Complex Concepts in Physics?</div>
+                                <div class="home_slider_next_link"><?php echo $nextpost_content; ?></div>
                             </div>
                         </div>
                     </div>
 
                 </div>
             </div>
-        <?php endforeach; ?>
+        <?php endforeach; endif; ?>
 
     </div>
 

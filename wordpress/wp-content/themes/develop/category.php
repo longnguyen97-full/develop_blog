@@ -61,6 +61,7 @@
                                     'category_name' => $category_name
                                 ];
                                 $posts = get_posts($args);
+                                if (!empty($posts)) :
                                 foreach ($posts as $key => $post) :
                                     $post_link    = get_permalink($post->ID);
                                     $post_title   = $post->post_title;
@@ -69,11 +70,12 @@
                                     $post_author  = get_the_author_posts_link_outside_loop($post);
 
                                     if (in_array($key, [0, 2, 3, 6])) :
+                                        $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/post_10.jpg';
                                 ?>
 
                                         <!-- Small Card With Image -->
                                         <div class="card card_small_with_image grid-item">
-                                            <img class="card-img-top" src="<?php assets(); ?>/images/post_10.jpg" alt="">
+                                            <img class="card-img-top" src="<?php echo $post_thumbnail; ?>" alt="">
                                             <div class="card-body">
                                                 <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_content; ?></a>
                                                 </div>
@@ -94,10 +96,11 @@
                                         </div>
                                     <?php
                                     elseif (in_array($key, [4, 5])) :
+                                        $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/post_11.jpg';
                                     ?>
                                         <!-- Small Card With Background -->
                                         <div class="card card_default card_small_with_background grid-item">
-                                            <div class="card_background" style="background-image:url(<?php assets(); ?>/images/post_11.jpg)"></div>
+                                            <div class="card_background" style="background-image:url(<?php echo $post_thumbnail; ?>)"></div>
                                             <div class="card-body">
                                                 <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_content; ?></a>
                                                 </div>
@@ -107,16 +110,17 @@
 
                                     <?php
                                     elseif (in_array($key, [9, 10])) :
+                                        $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/post_12.jpg';
                                     ?>
                                         <!-- Default Card With Background -->
                                         <div class="card card_default card_default_with_background grid-item">
-                                            <div class="card_background" style="background-image:url(<?php assets(); ?>/images/post_12.jpg)"></div>
+                                            <div class="card_background" style="background-image:url(<?php echo $post_thumbnail; ?>)"></div>
                                             <div class="card-body">
                                                 <div class="card-title card-title-small"><a href="<?php echo $post_link; ?>"><?php echo $post_content; ?></a></div>
                                             </div>
                                         </div>
                                 <?php endif;
-                                endforeach; ?>
+                                endforeach; endif; ?>
 
                             </div>
                         </div>

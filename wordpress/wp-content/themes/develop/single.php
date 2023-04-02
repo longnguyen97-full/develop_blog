@@ -1,6 +1,14 @@
 <?php get_header();
 $post_id = get_the_ID();
-CountPostView::countViews($post_id); ?>
+CountPostView::countViews($post_id);
+
+$args = [
+    'user_id'   => get_current_user_id(),
+    'post_type' => 'post',
+    'icon'      => 'like',
+    'class'     => ['mt-2', 'ml-2', 'text-right']
+];
+?>
 
 <!-- Home -->
 
@@ -26,10 +34,10 @@ CountPostView::countViews($post_id); ?>
 
                     <!-- Top Panel -->
                     <div class="post_panel post_panel_top d-flex flex-row align-items-center justify-content-start">
-                        <div class="author_image">
-                            <div><img src="<?php assets(); ?>/images/author.jpg" alt=""></div>
-                        </div>
                         <?php $author_id = get_post_field('post_author', $post_id); ?>
+                        <div class="author_image">
+                            <div><img src="<?php echo get_avatar_url($author_id); ?>" alt=""></div>
+                        </div>
                         <div class="post_meta"><a href="#"><?php the_author_meta('user_nicename', $author_id); ?></a><span><?php echo get_the_date('F j, Y', $post_id) . ' at ' . get_the_date('g:i a', $post_id); ?></span></div>
                         <div class="post_share ml-sm-auto">
                             <?php Bookmark::form($post_id); ?>
@@ -48,13 +56,14 @@ CountPostView::countViews($post_id); ?>
                     <div class="post_body">
                         <?php the_content(); ?>
                     </div>
+                    <?php Reaction::icon($post_id, $args); ?>
 
                     <!-- Bottom Panel -->
                     <div class="post_panel bottom_panel d-flex flex-row align-items-center justify-content-start">
                         <div class="author_image">
-                            <div><img src="<?php assets(); ?>/images/author.jpg" alt=""></div>
+                            <div><img src="<?php echo get_avatar_url($author_id); ?>" alt=""></div>
                         </div>
-                        <div class="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48 am</span></div>
+                        <div class="post_meta"><a href="#"><?php the_author_meta('user_nicename', $author_id); ?></a><span><?php echo get_the_date('F j, Y', $post_id) . ' at ' . get_the_date('g:i a', $post_id); ?></span></div>
                         <div class="post_share ml-sm-auto">
                             <?php Bookmark::form($post_id); ?>
                             <?php CountPostView::form($post_id); ?>
