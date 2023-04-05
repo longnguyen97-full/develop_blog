@@ -19,30 +19,22 @@ class theme_widget_list_archive extends WP_Widget
     {
         echo $args['before_widget'];
 
-        // $categories = get_categories(array(
-        //     'orderby' => 'name',
-        //     'order'   => 'ASC',
-        //     'number' => $instance['limit']
-        // ));
-
-        // foreach ($categories as $archive) {
-        //     echo '<ul><li><a href="' . get_archive_link($archive->term_id) . '">' . esc_html($archive->name) . ' (' . $archive->archive_count . ')' . '</a></li></ul>';
-        // }
-
+        $limit = 0;
         global $wpdb;
         $years = $wpdb->get_col("SELECT DISTINCT YEAR(post_date) FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' ORDER BY post_date DESC");
         if (!empty($years)) {
             $html = '<ul class="footer-list">';
             foreach ($years as $year) {
-                // $html .= '<li class="year_month"><a href="' . get_year_link($year) . '">' . $year . '</a>';
-                // $html .= '<ul class="monthlist">';
                 $months = $wpdb->get_col($wpdb->prepare("SELECT DISTINCT MONTH(post_date) FROM $wpdb->posts WHERE post_type='post' AND post_status='publish' AND YEAR(post_date) = %d ORDER BY post_date ASC", $year));
                 foreach ($months as $month) {
+                    if (!empty($instance['limit']) && $limit >= $instance['limit']) {
+                        break;
+                    }
+                    $limit++;
                     $dateObj   = DateTime::createFromFormat('!m', $month);
                     $monthName = $dateObj->format('F');
                     $html .= '<li class="year_month"><a href="' . get_month_link($year, $month) . '">' . $monthName . '</a>&nbsp;<a href="' . get_year_link($year) . '">' . $year . '</a></li>';
                 }
-                // $html .= '</ul>';
                 $html .= '</li>';
             }
             $html .= '</ul>';
