@@ -24,6 +24,13 @@ switch ($_SERVER['SERVER_NAME']) {
         $DB_USER     = 'root';
         $DB_PASSWORD = 'Cba@123456';
         $DB_HOST     = 'localhost';
+	break;
+
+    case 'blog.liamhome.link':
+        $DB_NAME     = 'blog_wp';
+        $DB_USER     = 'root';
+        $DB_PASSWORD = 'adminadmin';
+        $DB_HOST     = 'localhost';
         break;
 
     default:
