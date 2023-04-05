@@ -62,10 +62,17 @@ class CountPostView
         $select  = 'post_id';
         $oderby1 = 'date_views';
         $oderby2 = 'views';
-        $query   = match ($date) {
-            'day'   => "SELECT $select, RANK() OVER (ORDER BY $oderby1 DESC, $oderby2 DESC) AS 'rank' FROM $table",
-            'week'  => "SELECT $select FROM $table WHERE $oderby1 >= NOW() - INTERVAL 8 DAY AND $oderby1 < NOW() + INTERVAL 1 DAY ORDER BY $oderby1 DESC",
-            'month' => "SELECT $select, RANK() OVER (ORDER BY $oderby1 DESC, $oderby2 DESC) AS 'rank' FROM $table WHERE MONTH($oderby1) = MONTH(CURRENT_DATE()) AND YEAR($oderby1) = YEAR(CURRENT_DATE())",
+        switch ($date) {
+            case 'day':
+                $query = "SELECT $select, RANK() OVER (ORDER BY $oderby1 DESC, $oderby2 DESC) AS 'rank' FROM $table";
+                break;
+            case 'week':
+                $query = "SELECT $select FROM $table WHERE $oderby1 >= NOW() - INTERVAL 8 DAY AND $oderby1 < NOW() + INTERVAL 1 DAY ORDER BY $oderby1 DESC";
+                break;
+            case 'month':
+                $query = "SELECT $select, RANK() OVER (ORDER BY $oderby1 DESC, $oderby2 DESC) AS 'rank' FROM $table WHERE MONTH($oderby1) = MONTH(CURRENT_DATE()) AND YEAR($oderby1) = 
+                YEAR(CURRENT_DATE())";
+                break;
         };
         $results  = $wpdb->get_results($wpdb->prepare($query));
         $post_ids = array_column( $results, $select );

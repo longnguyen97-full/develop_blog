@@ -598,7 +598,7 @@ function arr_dump($data = [], $exit = false)
  */
 function get_the_author_posts_link_outside_loop($post = [])
 {
-    $post_author = get_author_name($post->post_author);
+    $post_author = get_the_author_meta('display_name', $post->post_author);
     $author_link = get_author_posts_url($post->post_author);
     return "<a href='$author_link'>$post_author</a>";
 }

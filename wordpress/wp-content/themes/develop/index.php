@@ -59,7 +59,7 @@
                                 foreach ($posts as $key => $post) :
                                     $post_link    = get_permalink($post->ID);
                                     $post_title   = $post->post_title;
-                                    $post_author  = get_author_name($post->post_author);
+                                    $post_author  = get_the_author_meta('display_name', $post->post_author);
                                     $post_date    = date('M d, Y \a\t g:i A', strtotime($post->post_date));
                                     $post_content = wp_trim_words($post->post_content, 11);
                                     $author_link  = get_author_posts_url($post->post_author);
@@ -171,7 +171,7 @@
                                 foreach ($posts as $key => $post) :
                                     $post_link   = get_permalink($post->ID);
                                     $post_title  = $post->post_title;
-                                    $post_author = get_author_name($post->post_author);
+                                    $post_author = get_the_author_meta('display_name', $post->post_author);
                                     $post_date   = date('M d, Y \a\t g:i A', strtotime($post->post_date));
                                     $author_link = get_author_posts_url($post->post_author);
 
@@ -263,7 +263,7 @@
                                 foreach ($posts as $key => $post) :
                                     $post_link   = get_permalink($post->ID);
                                     $post_title  = $post->post_title;
-                                    $post_author = get_author_name($post->post_author);
+                                    $post_author = get_the_author_meta('display_name', $post->post_author);
                                     $post_date   = date('M d, Y \a\t g:i A', strtotime($post->post_date));
                                     $author_link = get_author_posts_url($post->post_author);
 
