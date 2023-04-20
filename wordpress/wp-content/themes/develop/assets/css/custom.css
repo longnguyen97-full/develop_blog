@@ -1,5 +1,5 @@
 .hide {
-    display: none !important;
+  display: none !important;
 }
 
 hr {
@@ -11,48 +11,95 @@ hr {
 
 /* Toggle class */
 .cursor-pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
-.toggle-active, .text-light-blue {
-    color: #218df2 !important;
+.toggle-active,
+.text-light-blue {
+  color: #218df2 !important;
 }
 
 .footer-list {
-    text-align: justify;
-    margin-left: 15.5rem;
+  text-align: justify;
+  margin-left: 15.5rem;
 }
 /*Horizontal Ipad (1024 x 768)*/
-@media screen and (max-width: 1024px){
-    .footer-list {
-        margin-left: 9.5rem;
-    }
+@media screen and (max-width: 1024px) {
+  .footer-list {
+    margin-left: 9.5rem;
+  }
 }
 /*Vertical Ipad (768 x 1024)*/
-@media screen and (max-width: 768px){
-    .footer-list {
-        margin-left: 6.5rem;
-    }
+@media screen and (max-width: 768px) {
+  .footer-list {
+    margin-left: 6.5rem;
+  }
 }
 /*Small tablet(480 x 640)*/
-@media screen and (max-width: 480px){
-    .footer-list {
-        margin-left: 9.5rem;
-    }
+@media screen and (max-width: 480px) {
+  .footer-list {
+    margin-left: 9.5rem;
+  }
 }
 /*Iphone(480 x 640)*/
-@media screen and (max-width: 320px){
-    .footer-list {
-        margin-left: 4.5rem;
-    }
+@media screen and (max-width: 320px) {
+  .footer-list {
+    margin-left: 4.5rem;
+  }
 }
 /*Small Smart phone*/
-@media screen and (max-width: 240px){
-    .footer-list {
-        margin-left: 2.5rem;
-    }
+@media screen and (max-width: 240px) {
+  .footer-list {
+    margin-left: 2.5rem;
+  }
 }
 
 .author-avatar {
-    margin-left: 55px;
-    margin-top: 25px;
+  margin-left: 55px;
+  margin-top: 25px;
+}
+
+/* Ranking tabs */
+#tabs .nav-list {
+  margin: 0;
+  padding: 10px 0;
+}
+#tabs .nav-list li {
+  display: inline-block;
+  background-color: #f7f7f7;
+}
+#tabs .nav-list li .active {
+  background-color: #e3ebf7;
+  color: #285192;
+}
+#tabs .nav-list li {
+  margin-right: 10px;
+  border-radius: 0.25rem;
+}
+#tabs .nav-list li a {
+  padding: 10px;
+}
+
+#tabs a.nav-link {
+  cursor: pointer;
+}
+.tabs-item {
+  display: none;
+}
+.tabs-item ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.active {
+  display: inline-block;
+}
+
+/* Fix css on top slider */
+#custom_dots {
+    padding-left: 0;
+}
+.similar_posts_container .fix {
+    margin: 0;
+    padding: 0;
+    margin-right: 40px;
 }
