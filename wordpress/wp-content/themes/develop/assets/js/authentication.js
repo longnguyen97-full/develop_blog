@@ -78,14 +78,14 @@ jQuery(function ($) {
     });
 
     $(".submit_register").click(function () {
-      callAjaxSweetAlert2();
+      callAjaxSweetAlert2("register");
     });
 
     $(".submit_login").click(function () {
-      callAjaxSweetAlert2();
+      callAjaxSweetAlert2("login");
     });
 
-    function callAjaxSweetAlert2() {
+    function callAjaxSweetAlert2(button) {
       // setup data
       let user_name = $("#user_name").val();
       let user_email = $("#user_email").val();
@@ -100,24 +100,49 @@ jQuery(function ($) {
           user_email: user_email,
           user_password: user_password,
           confirm_password: confirm_password,
+          button: button,
         },
         type: "POST",
         success: function (response) {
+          // Register new user
           if (response.data == "register") {
+            // auth success
+            if (user_name && user_email && user_password && confirm_password) {
+              Swal.fire(
+                "Welcome to Develop Blog!",
+                "You have registered successfully.",
+                "success"
+              );
+            }
+          }
+          // Login
+          if (response.data == "login") {
+            // auth success
+            if (user_name && user_password) {
+              Swal.fire(
+                "Welcome to Develop Blog!",
+                "You have logged in successfully.",
+                "success"
+              );
+              $(".require_nologin").parents("li").addClass("hide");
+              $(".require_login").parents("li").removeClass("hide");
+            }
+          }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (jqXHR.responseJSON.data == "register") {
             Swal.fire(
-              "Good job!",
-              "You have registered successfully.",
-              "success"
+              "Something went wrong!",
+              "Please check register information again.",
+              "failed"
             );
           }
-          if (response.data == "login") {
+          if (jqXHR.responseJSON.data == "login") {
             Swal.fire(
-              "Good job!",
-              "You have logged in successfully.",
-              "success"
+              "Something went wrong!",
+              "Please check username or password again.",
+              "failed"
             );
-            $('.require_nologin').parents('li').addClass('hide');
-            $('.require_login').parents('li').removeClass('hide');
           }
         },
       });
