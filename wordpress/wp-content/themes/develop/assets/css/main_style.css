@@ -634,6 +634,7 @@ section
 	background: #899091;
 	border-radius: 14px;
 	text-align: center;
+	min-width: 115px;
 }
 .home_slider_item_category a
 {

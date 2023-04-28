@@ -17,7 +17,7 @@ get_header(); ?>
             <!-- Main Content -->
 
             <div class="col-lg-9 mb-5">
-                <div class="main_content">
+                <div class="main_content" style="margin-top: 100px">
 
                     <!-- Category -->
 

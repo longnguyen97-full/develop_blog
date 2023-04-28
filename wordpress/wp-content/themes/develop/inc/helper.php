@@ -420,7 +420,7 @@ function count_loaded_posts($post = 0)
         return;
     }
 
-    session_start();
+    // session_start();
     $_SESSION['loaded_posts'] = !empty($_SESSION['loaded_posts']) ? $_SESSION['loaded_posts'] + 1 : 1;
 }
 
