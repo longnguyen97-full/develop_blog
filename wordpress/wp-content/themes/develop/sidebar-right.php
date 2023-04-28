@@ -55,7 +55,7 @@
                             foreach ($sidebar_posts as $post) :
                                 $post_id   = $post->ID;
                                 $author_id = get_post_field ('post_author', $post_id);
-                                $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/top_1.jpg';
+                                $post_thumbnail = get_the_post_thumbnail_url($post->ID, 'post-thumbnail-200') ?: assets(true).'/images/top_1.jpg';
                             ?>
                             <!-- Sidebar Post -->
                             <div class="side_post">
@@ -260,7 +260,7 @@
                     <div id="tabs-1" class="tabs-item active">
                         <?php foreach ( $daily_posts as $post ) :
                             $author_id = get_post_field('post_author', $post_id);
-                            $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/top_3.jpg'; ?>
+                            $post_thumbnail = get_the_post_thumbnail_url($post->ID, 'post-thumbnail-200') ?: assets(true).'/images/top_3.jpg'; ?>
                             <div class="side_post">
                                 <a href="<?php echo get_permalink($post->ID); ?>">
                                     <div
@@ -281,7 +281,7 @@
                     <div id="tabs-2" class="tabs-item">
                         <?php foreach ( $weekly_posts as $post ) :
                             $author_id = get_post_field('post_author', $post_id);
-                            $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/top_3.jpg'; ?>
+                            $post_thumbnail = get_the_post_thumbnail_url($post->ID, 'post-thumbnail-200') ?: assets(true).'/images/top_3.jpg'; ?>
                             <div class="side_post">
                                 <a href="<?php echo get_permalink($post->ID); ?>">
                                     <div
@@ -302,7 +302,7 @@
                     <div id="tabs-3" class="tabs-item">
                         <?php foreach ( $monthly_posts as $post ) :
                             $author_id = get_post_field('post_author', $post_id);
-                            $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/top_3.jpg'; ?>
+                            $post_thumbnail = get_the_post_thumbnail_url($post->ID, 'post-thumbnail-200') ?: assets(true).'/images/top_3.jpg'; ?>
                             <div class="side_post">
                                 <a href="<?php echo get_permalink($post->ID); ?>">
                                     <div

@@ -646,3 +646,6 @@ function redirect_404()
     get_template_part(404);
     exit();
 }
+
+// register image size
+add_image_size('post-thumbnail-200', 200, 200, true);
