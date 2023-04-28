@@ -9,7 +9,7 @@ get_header(); ?>
 <div class="home">
     <div class="home_background parallax-window" data-parallax="scroll" data-image-src="<?php assets(); ?>/images/regular.jpg"
         data-speed="0.8"></div>
-    <div class="home_content">
+    <div class="home_content contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">

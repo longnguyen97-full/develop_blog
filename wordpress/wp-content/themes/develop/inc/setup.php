@@ -407,6 +407,13 @@ function theme_add_scripts_styles()
         // Theme stylesheet.
         wp_enqueue_style( TEXT_DOMAIN . '-contact', getAssets() . '/css/contact.css', array(), wp_get_theme()->get( 'Version' ) );
         wp_enqueue_style( TEXT_DOMAIN . '-contact_responsive', getAssets() . '/css/contact_responsive.css', array(), wp_get_theme()->get( 'Version' ) );
+    // Pages
+    } elseif (is_page()) {
+        // Theme script.
+        wp_enqueue_script( TEXT_DOMAIN . '-regular', getAssets() . '/js/regular.js', array(), wp_get_theme()->get( 'Version' ), true );
+        // Theme stylesheet.
+        wp_enqueue_style( TEXT_DOMAIN . '-regular', getAssets() . '/css/regular.css', array(), wp_get_theme()->get( 'Version' ) );
+        wp_enqueue_style( TEXT_DOMAIN . '-regular_responsive', getAssets() . '/css/regular_responsive.css', array(), wp_get_theme()->get( 'Version' ) );
     // Other pages
     } else {
         // Theme script.

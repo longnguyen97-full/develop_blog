@@ -11,7 +11,7 @@ jQuery(function($) {
         // fill color to navbar on search, profile pages
         let searchParam = getUrlParameter('s');
         let pathname = window.location.pathname.replace(/\//, '').split('/', 1)[0];
-        if ($.inArray(pathname, ['profile']) !== -1 || searchParam) {
+        if ($.inArray(pathname, ['profile', '404']) !== -1 || searchParam) {
             $('header.header').addClass('noscroll');
         }
     });
