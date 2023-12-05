@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The base configuration for WordPress
  *
@@ -24,9 +25,16 @@ switch ($_SERVER['SERVER_NAME']) {
         $DB_USER     = 'root';
         $DB_PASSWORD = 'Cba@123456';
         $DB_HOST     = 'localhost';
-	break;
+        break;
 
     case 'blog.liamhome.link':
+        $DB_NAME     = 'blog_wp';
+        $DB_USER     = 'root';
+        $DB_PASSWORD = 'adminadmin';
+        $DB_HOST     = 'localhost';
+        break;
+
+    case 'develop.wsl':
         $DB_NAME     = 'blog_wp';
         $DB_USER     = 'root';
         $DB_PASSWORD = 'adminadmin';
@@ -40,27 +48,27 @@ switch ($_SERVER['SERVER_NAME']) {
         $DB_HOST     = 'db.cba';
         break;
 }
-define( 'WP_HOME', 'http://'.$_SERVER['SERVER_NAME'] );
-define( 'WP_SITEURL', 'http://'.$_SERVER['SERVER_NAME'] );
+define('WP_HOME', 'http://' . $_SERVER['SERVER_NAME']);
+define('WP_SITEURL', 'http://' . $_SERVER['SERVER_NAME']);
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', $DB_NAME );
+define('DB_NAME', $DB_NAME);
 
 /** Database username */
-define( 'DB_USER', $DB_USER );
+define('DB_USER', $DB_USER);
 
 /** Database password */
-define( 'DB_PASSWORD', $DB_PASSWORD );
+define('DB_PASSWORD', $DB_PASSWORD);
 
 /** Database hostname */
-define( 'DB_HOST', $DB_HOST );
+define('DB_HOST', $DB_HOST);
 
 /** Database charset to use in creating database tables. */
-define( 'DB_CHARSET', 'utf8' );
+define('DB_CHARSET', 'utf8');
 
 /** The database collate type. Don't change this if in doubt. */
-define( 'DB_COLLATE', '' );
+define('DB_COLLATE', '');
 
 /**#@+
  * Authentication unique keys and salts.
@@ -73,14 +81,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         'put your unique phrase here' );
-define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
-define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
-define( 'NONCE_KEY',        'put your unique phrase here' );
-define( 'AUTH_SALT',        'put your unique phrase here' );
-define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
-define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
-define( 'NONCE_SALT',       'put your unique phrase here' );
+define('AUTH_KEY',         'put your unique phrase here');
+define('SECURE_AUTH_KEY',  'put your unique phrase here');
+define('LOGGED_IN_KEY',    'put your unique phrase here');
+define('NONCE_KEY',        'put your unique phrase here');
+define('AUTH_SALT',        'put your unique phrase here');
+define('SECURE_AUTH_SALT', 'put your unique phrase here');
+define('LOGGED_IN_SALT',   'put your unique phrase here');
+define('NONCE_SALT',       'put your unique phrase here');
 
 /**#@-*/
 
@@ -104,7 +112,7 @@ $table_prefix = 'wp_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', false );
+define('WP_DEBUG', false);
 
 /* Add any custom values between this line and the "stop editing" line. */
 
@@ -113,8 +121,8 @@ define( 'WP_DEBUG', false );
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
-if ( ! defined( 'ABSPATH' ) ) {
-    define( 'ABSPATH', __DIR__ . '/' );
+if (!defined('ABSPATH')) {
+    define('ABSPATH', __DIR__ . '/');
 }
 
 /* Uncomment before upload file */
