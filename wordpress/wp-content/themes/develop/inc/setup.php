@@ -377,6 +377,7 @@ function theme_add_scripts_styles()
     wp_enqueue_style( TEXT_DOMAIN . '-fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0' );
     wp_enqueue_script( TEXT_DOMAIN . '-custom', getAssets() . '/js/custom.js', array(), wp_get_theme()->get( 'Version' ), true );
     wp_enqueue_script( TEXT_DOMAIN . '-sweetalert2', 'https://cdn.jsdelivr.net/npm/sweetalert2@11', array(), '11.7.3', true );
+    wp_enqueue_style( TEXT_DOMAIN . '-post_nosidebar', getAssets() . '/css/post_nosidebar.css', array(), wp_get_theme()->get( 'Version' ) );
 
     // TOP page
     if (is_home()) {
@@ -406,6 +407,13 @@ function theme_add_scripts_styles()
         // Theme stylesheet.
         wp_enqueue_style( TEXT_DOMAIN . '-contact', getAssets() . '/css/contact.css', array(), wp_get_theme()->get( 'Version' ) );
         wp_enqueue_style( TEXT_DOMAIN . '-contact_responsive', getAssets() . '/css/contact_responsive.css', array(), wp_get_theme()->get( 'Version' ) );
+    // Pages
+    } elseif (is_page()) {
+        // Theme script.
+        wp_enqueue_script( TEXT_DOMAIN . '-regular', getAssets() . '/js/regular.js', array(), wp_get_theme()->get( 'Version' ), true );
+        // Theme stylesheet.
+        wp_enqueue_style( TEXT_DOMAIN . '-regular', getAssets() . '/css/regular.css', array(), wp_get_theme()->get( 'Version' ) );
+        wp_enqueue_style( TEXT_DOMAIN . '-regular_responsive', getAssets() . '/css/regular_responsive.css', array(), wp_get_theme()->get( 'Version' ) );
     // Other pages
     } else {
         // Theme script.

@@ -20,21 +20,21 @@ class Authentication
     public function callbackAjax()
     {
         // setup data
-        $user_name             = isset($_POST['user_name']) ? $_POST['user_name'] : '';
-        $user_email            = isset($_POST['user_email']) ? $_POST['user_email'] : '';
-        $user_password         = isset($_POST['user_password']) ? $_POST['user_password'] : '';
-        $confirm_password      = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
+        $user_name        = isset($_POST['user_name']) ? $_POST['user_name'] : '';
+        $user_email       = isset($_POST['user_email']) ? $_POST['user_email'] : '';
+        $user_password    = isset($_POST['user_password']) ? $_POST['user_password'] : '';
+        $confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
+        $button           = isset($_POST['button']) ? $_POST['button'] : '';
 
         // Register new user
-        $response_register = self::register($user_name, $user_email, $user_password, $confirm_password);
-        if (!empty($response_register)) {
-            wp_send_json_success('register');
+        if ($button == 'register') {
+            $registerd = self::register($user_name, $user_email, $user_password, $confirm_password);
+            $registerd == 'success' ? wp_send_json_success($button) : wp_send_json_error($button, 500);
         }
-
         // Login
-        $response_login = self::login($user_name, $user_password);
-        if (!empty($response_login)) {
-            wp_send_json_success('login');
+        if ($button == 'login') {
+            $logged_in = self::login($user_name, $user_password);
+            $logged_in == 'success' ? wp_send_json_success($button) : wp_send_json_error($button, 500);
         }
     }
 
@@ -77,10 +77,10 @@ class Authentication
             $creds['user_password'] = $user_password ?: '';
             $user = wp_signon($creds, false);
             if (!is_wp_error($user)) {
-                return $user;
+                return 'success';
             }
         }
-        echo $user->get_error_message();
+        return 'failed';
     }
 
     public function logout()
