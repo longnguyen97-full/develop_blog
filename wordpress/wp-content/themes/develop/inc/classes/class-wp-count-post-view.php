@@ -64,12 +64,15 @@ class CountPostView
         $oderby2 = 'views';
         switch ($date) {
             case 'day':
-                $query = "SELECT $select, RANK() OVER (ORDER BY $oderby1 DESC, $oderby2 DESC) AS 'rank' FROM $table";
+                // only get posts match condition (current day) and rank according to the nearest date, most views
+                $query = "SELECT $select, RANK() OVER (ORDER BY $oderby1 DESC, $oderby2 DESC) AS 'rank' FROM $table WHERE $oderby1 >= NOW() - INTERVAL 1 DAY";
                 break;
             case 'week':
-                $query = "SELECT $select FROM $table WHERE $oderby1 >= NOW() - INTERVAL 8 DAY AND $oderby1 < NOW() + INTERVAL 1 DAY ORDER BY $oderby1 DESC";
+                // only get posts match condition (back to 7 days from current day, it means 8 days totally) and rank according to nearest date, most views
+                $query = "SELECT $select, RANK() OVER (ORDER BY $oderby1 DESC, $oderby2 DESC) AS 'rank' FROM $table WHERE $oderby1 >= NOW() - INTERVAL 8 DAY";
                 break;
             case 'month':
+                // only get posts match conditions (current month, current year) and rank according to nearest date, most views
                 $query = "SELECT $select, RANK() OVER (ORDER BY $oderby1 DESC, $oderby2 DESC) AS 'rank' FROM $table WHERE MONTH($oderby1) = MONTH(CURRENT_DATE()) AND YEAR($oderby1) = 
                 YEAR(CURRENT_DATE())";
                 break;
