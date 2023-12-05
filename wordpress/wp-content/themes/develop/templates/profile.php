@@ -6,7 +6,7 @@
  * Support file: /mypage/user-profile.php
  */
 if (!is_user_logged_in()) {
-    return;
+    redirect_404();
 }
 get_header();
 
@@ -53,12 +53,6 @@ function mp_user_profile_submit()
     return $response;
 }
 ?>
-
-<!-- Home -->
-
-<div class="home">
-    <div class="home_background parallax-window" data-parallax="scroll" data-image-src="<?php assets(); ?>/images/category.jpg" data-speed="0.8"></div>
-</div>
 
 <!-- Page Content -->
 

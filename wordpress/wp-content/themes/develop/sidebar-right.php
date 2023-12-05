@@ -55,7 +55,7 @@
                             foreach ($sidebar_posts as $post) :
                                 $post_id   = $post->ID;
                                 $author_id = get_post_field ('post_author', $post_id);
-                                $post_thumbnail = get_the_post_thumbnail_url($post->ID) ?: assets(true).'/images/top_1.jpg';
+                                $post_thumbnail = get_the_post_thumbnail_url($post->ID, 'post-thumbnail-200') ?: assets(true).'/images/top_1.jpg';
                             ?>
                             <!-- Sidebar Post -->
                             <div class="side_post">
@@ -246,8 +246,8 @@
             <div class="sidebar_title_container">
                 <div class="sidebar_title">Ranking List</div>
                 <div id="tabs">
-                    <ul class="nav nav-pills nav-fill">
-                    <li class="nav-item">
+                    <ul class="nav-list">
+                        <li class="nav-item">
                             <a class="nav-link tabs-1 most-viewed-post active" data-tab="tabs-1" aria-current="page">Daily</a>
                         </li>
                         <li class="nav-item">
@@ -258,39 +258,71 @@
                         </li>
                     </ul>
                     <div id="tabs-1" class="tabs-item active">
-                        <?php foreach ( $daily_posts as $post ) : ?>
-                            <div><a href="<?php echo get_permalink($post->ID); ?>"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></a></div>
+                        <?php foreach ( $daily_posts as $post ) :
+                            $author_id = get_post_field('post_author', $post_id);
+                            $post_thumbnail = get_the_post_thumbnail_url($post->ID, 'post-thumbnail-200') ?: assets(true).'/images/top_3.jpg'; ?>
+                            <div class="side_post">
+                                <a href="<?php echo get_permalink($post->ID); ?>">
+                                    <div
+                                        class="d-flex flex-row align-items-xl-center align-items-start justify-content-start">
+                                        <div class="side_post_image">
+                                            <div><img src="<?php echo $post_thumbnail; ?>" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="side_post_content">
+                                            <div class="side_post_title"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></div>
+                                            <small class="post_meta"><?php the_author_meta('user_nicename', $author_id); ?><span><?php echo get_the_date('F j, Y', $post_id) . ' at ' . get_the_date('g:i a', $post_id); ?></span></small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         <?php endforeach; ?>
                     </div>
                     <div id="tabs-2" class="tabs-item">
-                        <?php foreach ( $weekly_posts as $post ) : ?>
-                            <div><a href="<?php echo get_permalink($post->ID); ?>"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></a></div>
+                        <?php foreach ( $weekly_posts as $post ) :
+                            $author_id = get_post_field('post_author', $post_id);
+                            $post_thumbnail = get_the_post_thumbnail_url($post->ID, 'post-thumbnail-200') ?: assets(true).'/images/top_3.jpg'; ?>
+                            <div class="side_post">
+                                <a href="<?php echo get_permalink($post->ID); ?>">
+                                    <div
+                                        class="d-flex flex-row align-items-xl-center align-items-start justify-content-start">
+                                        <div class="side_post_image">
+                                            <div><img src="<?php echo $post_thumbnail; ?>" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="side_post_content">
+                                            <div class="side_post_title"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></div>
+                                            <small class="post_meta"><?php the_author_meta('user_nicename', $author_id); ?><span><?php echo get_the_date('F j, Y', $post_id) . ' at ' . get_the_date('g:i a', $post_id); ?></span></small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         <?php endforeach; ?>
                     </div>
                     <div id="tabs-3" class="tabs-item">
-                        <?php foreach ( $monthly_posts as $post ) : ?>
-                            <div><a href="<?php echo get_permalink($post->ID); ?>"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></a></div>
+                        <?php foreach ( $monthly_posts as $post ) :
+                            $author_id = get_post_field('post_author', $post_id);
+                            $post_thumbnail = get_the_post_thumbnail_url($post->ID, 'post-thumbnail-200') ?: assets(true).'/images/top_3.jpg'; ?>
+                            <div class="side_post">
+                                <a href="<?php echo get_permalink($post->ID); ?>">
+                                    <div
+                                        class="d-flex flex-row align-items-xl-center align-items-start justify-content-start">
+                                        <div class="side_post_image">
+                                            <div><img src="<?php echo $post_thumbnail; ?>" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="side_post_content">
+                                            <div class="side_post_title"><?php echo mb_strimwidth($post->post_title, 0, 35, "..."); ?></div>
+                                            <small class="post_meta"><?php the_author_meta('user_nicename', $author_id); ?><span><?php echo get_the_date('F j, Y', $post_id) . ' at ' . get_the_date('g:i a', $post_id); ?></span></small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
             </div>
         </div>
-        <style>
-            #tabs a.nav-link {
-                cursor: pointer;
-            }
-            .tabs-item {
-                display: none;
-            }
-            .tabs-item ol {
-                list-style-type: none;
-                padding: 0;
-                margin: 0;
-            }
-            .active {
-                display: inline-block;
-            }
-        </style>
         <script>
         jQuery( document ).ready(function($) {
             $('#tabs a.nav-link').click(function(e) {

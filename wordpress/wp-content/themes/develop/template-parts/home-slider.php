@@ -47,7 +47,7 @@
                 <!-- Similar Posts -->
                 <div class="similar_posts_container">
                     <div class="container">
-                        <div class="row d-flex flex-row align-items-end">
+                        <div class="row d-flex flex-row align-items-end fix">
 
                             <?php
                             $args = ['numberposts' => 3, 'category__in' => wp_get_post_categories($post->ID), 'post__not_in' => array($post->ID)];
